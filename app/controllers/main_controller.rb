@@ -1,4 +1,46 @@
 class MainController < ApplicationController
   def index
   end
+  
+  # * <tt>POST /session</tt>
+  # * send a HTTP POST message to me to create a session. (log in)
+  # * <tt>session[login]</tt> and <tt>session[password]</tt> fields should be included in the message body.
+  def create
+    reset_session
+    u = User.authenticate(params[:session][:login], params[:session][:password])
+    
+    if u
+      reset_session
+      session[:user_id] = u.id
+      @current_user = User.find(session[:user_id])
+      flash[:notice] = 'hi, again!'
+      redirect_to u
+    else
+      flash[:error] = 'Invalid login or password.'
+      render :index
+    end
+  end
+  
+  # * <tt>DELETE /session</tt>
+  # * send a HTTP DELETE message to me to destroy a session. (log out)
+  # * the HTTP DELETE message can be simulated useing HTTP POST with <tt>_method=DELETE</tt> message.
+  def destroy
+    reset_session
+    flash[:notice] = "You've been logged out."
+    redirect_to root_url
+  end
+  
+  # * <tt>POST /session/forgot</tt>
+  # * send a HTTP POST message to me to reset password.
+  # * <tt>user[email]</tt> should be included in the message.
+  # * Note: this mechanism is currently *insecure*.
+  def forgot
+    u = User.find_by_email(params[:user][:email])
+    if u and u.send_new_password
+      flash[:message] = 'A new password has been sent by email.'
+      redirect_to root_url
+    else
+      flash[:error] = "Couldn't send password."
+    end
+  end
 end

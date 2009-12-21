@@ -1,4 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resource :session, :controller => :main, :only => %w(create destroy), :member => { :forgot => :post }
+  map.resources :users, :except => ['index']
+  
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

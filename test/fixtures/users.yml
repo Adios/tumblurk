@@ -1,0 +1,20 @@
+adios:
+    id: 10000001
+    login: adios
+    salt: 1000
+    email: adiosf6f@gmail.com
+    hashed_password: <%= Digest::SHA1.hexdigest('testtest' + '1000') %>
+    
+cindera:
+    id: 10002
+    login: cindera
+    salt: 1000
+    email: cinera19@gmail.com
+    hashed_password: <%= Digest::SHA1.hexdigest('testtest' + '1000') %>
+    
+flachesis:
+    id: 999999
+    login: flachesis
+    salt: 1000
+    email: xxxx@gmail.com
+    hashed_password: <%= Digest::SHA1.hexdigest('testtesttesttest' + '1000') %>

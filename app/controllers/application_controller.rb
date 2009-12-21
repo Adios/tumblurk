@@ -1,10 +1,19 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
-
+# Note: all methods in the application are protected by using #protect_from_forgery.
 class ApplicationController < ActionController::Base
-  helper :all # include all helpers, all the time
-  protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  helper :all
+  protect_from_forgery
 
-  # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  protected
+  
+  # * work as a filter for any other method that needs to be authencated.
+  # * after passing through it, an instance variable -- <tt>@current_user</tt> will be set up.
+  # * <tt>@current_user</tt> contains the #User instance of corresponded user id.   
+  def login_required
+    if session[:user_id]
+      @current_user = User.find(session[:user_id])
+    else
+      flash[:notice] = "Please log in"
+      redirect_to root_url
+    end
+  end
 end
