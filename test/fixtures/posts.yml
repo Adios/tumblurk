@@ -1,0 +1,16 @@
+post_one:
+    post_type: 1
+    head: this is a post
+    body: an important post!
+    user_id: 10000001
+    id: 1
+    visible: true
+hidden_post_one:
+    post_type: 1
+    head: this is a hidden post
+    body: you shouldn't see me
+    user_id: 10000001
+    id: 2
+    visible: false
+
+    

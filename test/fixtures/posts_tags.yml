@@ -1,0 +1,12 @@
+p_t_1:
+    post_id: 1
+    tag_id: 1
+p_t_2:
+    post_id: 2
+    tag_id: 1
+p_t_3:
+    post_id: 1
+    tag_id: 2
+p_t_4:
+    post_id: 2
+    tag_id: 2

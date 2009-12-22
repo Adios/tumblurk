@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :posts
+  has_many :tags, :through => :posts
+  
   validates_length_of :login, :within => 3..32
   validates_length_of :password, :within => 5..64
   validates_presence_of :login, :email, :password, :password_confirmation

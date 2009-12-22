@@ -1,12 +1,6 @@
-important:
-    name: important
+official:
+    name: official
     id: 1
 beauty:
-    name: beauty girl
+    name: beauty
     id: 2
-olympus:
-    name: olympus
-    id: 3
-award:
-    name: award
-    id: 4

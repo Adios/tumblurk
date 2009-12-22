@@ -1,8 +1,6 @@
 require 'test_helper'
 
-class UsersControllerTest < ActionController::TestCase
-  self.use_instantiated_fixtures = true
-  
+class UsersControllerTest < ActionController::TestCase  
   test 'editing user information requires authenticaion' do
     # not logged in
     get :edit, { :id => @adios.id }

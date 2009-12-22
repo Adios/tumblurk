@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class MainControllerTest < ActionController::TestCase
-  self.use_instantiated_fixtures = true
-
   test "login and logout" do
     # failure
     post :create, { :session => { :login => @adios.login, :password => '123123' } }

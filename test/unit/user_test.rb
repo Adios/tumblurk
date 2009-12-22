@@ -2,8 +2,6 @@ require 'test_helper'
 require 'digest/sha1'
 
 class UserTest < ActiveSupport::TestCase
-  self.use_instantiated_fixtures = true
-
   test 'encrypt() & hashed generation' do
     u = User.new :login => 'soida', :email => 'adios@adios.com'
     u.salt = '1000'
