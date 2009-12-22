@@ -1,3 +1,4 @@
+# Provide user management functions.
 class UsersController < ApplicationController
   before_filter :login_required, :only => %w(edit update destroy)
 
