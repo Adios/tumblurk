@@ -1,7 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
   map.resource :session, :controller => :main, :only => %w(create destroy), :member => { :forgot => :post }
-  map.resources :users, :except => ['index']
-  map.resources :tags, :except => %w(new edit update)
+  map.resources :users, :except => %(index) do |user|
+    user.resources :tags, :only => %(show)
+  end
+  map.resources :tags, :only => %(show)
+  map.resources :posts, :except => %(edit new index)
   
   # The priority is based upon order of creation: first created -> highest priority.
 

@@ -1,21 +1,15 @@
+# Provide access points to tagged posts.
 class TagsController < ApplicationController
-  before_filter :login_required, :only => %w(create destroy)
-  
-  def index
-    @tags = Tag.all
-  end
-  
+  # * <tt>GET /tags/[ID]</tt>
+  # * show posts tagged by the specified id.
   def show
-  end
-  
-  def create
-    @tag = params[:tag][:name]
+    tag = Tag.find(params[:id])
     
     respond_to do |format|
-      format.html
+      if not tag.nil?
+        @posts = tag.posts
+        format.html
+      end
     end
-  end
-  
-  def destroy
   end
 end
