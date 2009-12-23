@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 4) do
+ActiveRecord::Schema.define(:version => 5) do
 
   create_table "posts", :force => true do |t|
     t.integer  "post_type"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(:version => 4) do
     t.datetime "updated_at"
     t.datetime "publish_at"
     t.integer  "user_id"
+    t.string   "session"
+    t.integer  "post_id"
   end
 
   create_table "posts_tags", :id => false, :force => true do |t|

@@ -12,6 +12,19 @@ class PostsControllerTest < ActionController::TestCase
       post :create, { :post => { :post_type => '1' } }, { :user_id => @adios.id }
     end
     assert_response :redirect
+    # create a repost
+    assert_difference 'Post.count' do
+      post :create, { :post => { :post_type => '1', :post_id => @post_one.id } }, { :user_id => @adios.id }
+    end
+    assert_equal @post_one.id, assigns(:post).post_id
+    assert_equal @post_one.session, assigns(:post).session
+    # create an invalid repost, should be treated as a fresh post.
+    assert_difference 'Post.count' do
+      post :create, { :post => { :post_type => '1', :post_id => '123' } }, { :user_id => @adios.id }
+    end
+    assert_nil assigns(:post).post_id
+    assert assigns(:post).session
+    assert_equal 1, Post.find_all_by_session(assigns(:post).session).count
   end
 
   test "delete a post" do

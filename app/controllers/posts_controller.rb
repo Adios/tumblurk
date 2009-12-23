@@ -9,9 +9,10 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(params[:post])
     @post.user_id = @current_user.id
+    @post.post_id = params[:post][:post_id]
     
     respond_to do |format|
-      if @post.save
+      if @post.valid? and @post.save!
         format.html { redirect_to @current_user }
       else
         format.html

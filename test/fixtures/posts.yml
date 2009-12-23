@@ -5,6 +5,7 @@ post_one:
     user_id: 10000001
     id: 1
     visible: true
+    session: abc
 hidden_post_one:
     post_type: 1
     head: this is a hidden post
@@ -12,5 +13,6 @@ hidden_post_one:
     user_id: 10000001
     id: 2
     visible: false
+    session: cdf
 
     
