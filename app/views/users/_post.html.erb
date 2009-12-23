@@ -1,0 +1,20 @@
+<fieldset>
+<p>type: <%= post_type post.post_type %></p>
+<p>title: <%= post.head %></p>
+<p>content: <%= post.body %></p>
+<p>created_at: <%= post.created_at %></p>
+<p>publish_at: <%= post.publish_at? ? post.publish_at : nil %></p>
+<p>by: <%= post.user_id? ? post.user.login : 'someone' %></p>
+<p>
+	<% if post.post_id %>
+	reposted from
+	<%= link_to_if exists(post.post_id), ' #' + post.post_id.to_s, post_path(post.post_id) %>
+	<% end %>
+</p>
+<p>
+	<%= link_to '#' + post.id.to_s, post %>
+	<%= link_to_if post.user_id == session[:user_id], 'delete', post, :method => :delete %>
+	<%= link_to_if post.user_id == session[:user_id], 'edit', edit_post_path(post) %>
+	<%= link_to_unless post.user_id == session[:user_id], 'repost', new_post_path + '/' + post.id.to_s %>
+</p>
+</fieldset>

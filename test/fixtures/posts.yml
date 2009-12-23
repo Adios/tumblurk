@@ -5,14 +5,41 @@ post_one:
     user_id: 10000001
     id: 1
     visible: true
+    created_at: <%= Time.now - 86400 - 5000 %>
     session: abc
 hidden_post_one:
     post_type: 1
     head: this is a hidden post
-    body: you shouldn't see me
+    body: you shouldnt see me
     user_id: 10000001
     id: 2
     visible: false
+    created_at: <%= Time.now - 86400 - 4000 %>
     session: cdf
-
-    
+post_two:
+    post_type: 2
+    head: this is 2 post
+    body: hi
+    user_id: 999999
+    id: 3
+    session: abc
+    created_at: <%= Time.now - 86400 - 3000 %>
+    post_id: 1
+post_three:
+    post_type: 2
+    head: this is 3 post
+    body: lo
+    user_id: 10002
+    id: 4
+    post_id: 1
+    created_at: <%= Time.now - 86400 - 2000 %>
+    session: abc
+a_cut_head_post:
+    post_type: 4
+    head: i have no head
+    body: yo yoyo no head
+    user_id: 10002
+    id: 5
+    post_id: 0
+    created_at: <%= Time.now - 86400 - 1000 %>
+    session: kokoko

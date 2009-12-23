@@ -1,6 +1,27 @@
 # Provide access to posts resources.
 class PostsController < ApplicationController
-  before_filter :login_required, :only => %w(create destroy update)
+  before_filter :login_required, :except => %w(show)
+  
+  include ApplicationHelper
+  def new
+    @post = Post.new
+   
+    if params[:type].index /^[0-9]+$/
+      @post.post_id = params[:type]
+      @post.post_type = 1
+    else
+      @post.post_type = post_type params[:type]
+    end
+  end
+  
+  def show
+    @post = Post.find(params[:id])
+  end
+  
+  def edit
+    @post = Post.find(params[:id])
+    redirect_to @current_user unless @current_user.id == @post.user_id
+  end
   
   # <tt>POST /posts</tt>
   # 

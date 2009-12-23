@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   # * e.g. GET users/1
   def show
     @user = User.find(params[:id])
+    @posts = Post.all :order => 'created_at DESC'
   end
   
   # * <tt>POST /users</tt>

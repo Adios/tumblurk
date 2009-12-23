@@ -1,0 +1,33 @@
+<% form_for @post do |f| %>
+	<fieldset>
+		<legend>post</legend>
+		<br>
+		<p>
+			type: <%= post_type @post.post_type %>
+		</p>
+		<p>
+			<% if @post.post_id %>
+			original from
+			<%= link_to "##{@post.post_id}", post_path(@post.post_id) %>
+			<% end %>
+		</p>
+		<p>
+			title:
+			<%= f.text_field :head %>
+		</p>
+		<p>
+			body:
+			<%= f.text_field :body %>
+		</p>
+		<p>
+			publish at:
+			<%= f.datetime_select :publish_at %>
+		</p>
+		<%= f.hidden_field :post_type %>
+		<%= f.hidden_field :post_id %>
+	</fieldset>
+	<fieldset>
+		<legend>tag</legend>
+	</fieldset>
+	<%= f.submit @post.post_id ? 'Repost' : 'Post' %>
+<% end %>

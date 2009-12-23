@@ -4,7 +4,8 @@ ActionController::Routing::Routes.draw do |map|
     user.resources :tags, :only => %(show)
   end
   map.resources :tags, :only => %(show)
-  map.resources :posts, :except => %(edit new index)
+  map.resources :posts, :except => %(new index)
+  map.connect 'posts/new/:type', :controller => 'posts', :action => 'new', :conditions => { :method => :get }
   
   # The priority is based upon order of creation: first created -> highest priority.
 
