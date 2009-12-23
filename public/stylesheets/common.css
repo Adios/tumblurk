@@ -1,0 +1,25 @@
+form input {
+	border: 1px solid gray;
+}
+
+div.fieldWithErrors {
+    outline: 2px solid #f00;
+}
+#errorExplanation {
+  width: 100%;
+  border: 2px solid red;
+  background-color: #fff;
+  margin-bottom: 20px
+}
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  background-color: #c00;
+  color: #ffefe0;
+  padding-left: 10px;
+}
+#errorExplanation ul li {
+  color: #000;
+  padding-left: 20px;
+  list-style: square inside;
+}

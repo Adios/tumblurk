@@ -1,5 +1,12 @@
 class MainController < ApplicationController
+  before_filter :redirect_logged, :only => %w(new forgot create)
+  before_filter :login_required, :only => %w(destroy)
+  
   def index
+  end
+  
+  def new
+    @user = User.new
   end
   
   # * <tt>POST /session</tt>
@@ -12,12 +19,13 @@ class MainController < ApplicationController
     if u
       reset_session
       session[:user_id] = u.id
+      session[:user_login] = u.login
       @current_user = User.find(session[:user_id])
       flash[:notice] = 'hi, again!'
       redirect_to u
     else
       flash[:error] = 'Invalid login or password.'
-      render :index
+      render :new
     end
   end
   

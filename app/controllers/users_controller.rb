@@ -1,6 +1,7 @@
 # Provide user management functions.
 class UsersController < ApplicationController
   before_filter :login_required, :only => %w(edit update destroy)
+  before_filter :redirect_logged, :only => %w(new create)
 
   def new
     @user = User.new
@@ -24,10 +25,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     
-    if @user.save
+    if @user.valid? and @user.save!
       reset_session
       session[:user_id] = @user.id
-      @current_user = User.find(session[:user_id])
+      session[:user_login] = @user.login
       flash[:notice] = 'Hi'
       redirect_to @user
     else

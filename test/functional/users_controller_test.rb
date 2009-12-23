@@ -19,7 +19,11 @@ class UsersControllerTest < ActionController::TestCase
   test 'user signup serivce' do
     # sign up for an existing login name
     assert_no_difference 'User.count' do
-      post :create, { :user => { :login => @adios.login } }
+      post :create, { :user => {
+        :login => @adios.login,
+        :password => 'catcat',
+        :password_confirmation => 'catcat',
+        :email => 'alison@alison.org' } }
     end
     # sign up 
     assert_difference 'User.count' do
@@ -27,8 +31,7 @@ class UsersControllerTest < ActionController::TestCase
         :login => 'alison',
         :password => 'alisonisthebest', 
         :password_confirmation => 'alisonisthebest', 
-        :email => 'alison@alison.org' }
-      }, { :user_id => @adios.id }
+        :email => 'alison@alison.org' } }
     end
     assert_response :redirect
     assert_redirected_to assigns(:user)

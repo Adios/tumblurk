@@ -2,7 +2,7 @@
 class ApplicationController < ActionController::Base
   helper :all
   protect_from_forgery
-
+  
   protected
   
   # * work as a filter for any other method that needs to be authencated.
@@ -15,5 +15,10 @@ class ApplicationController < ActionController::Base
       flash[:notice] = "Please log in"
       redirect_to root_url
     end
+  end
+  
+  # redirect to user page if the session has been set.
+  def redirect_logged
+    redirect_to user_path(session[:user_id]) if session[:user_id]
   end
 end

@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resource :session, :controller => :main, :only => %w(create destroy), :member => { :forgot => :post }
+  map.resource :session, :controller => :main, :only => %w(new create destroy), :member => { :forgot => :post }
   map.resources :users, :except => %(index) do |user|
     user.resources :tags, :only => %(show)
   end
