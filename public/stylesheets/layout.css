@@ -1,3 +1,48 @@
 body {
-	padding: 0 15%;
+	/*padding: 0 15%;*/
 }
+
+#wrapper{
+	margin: auto;
+	width: 70%;
+	border: 1pt solid #666666;
+}
+
+#leftside{
+	float: left;
+	width: 140px;
+	/*border: 1px solid #666666;*/
+}
+
+#logo{
+	padding: 20px;
+	width: 100px;
+	height: 100px;
+}
+
+#sidebar{
+	padding: 20px;
+	width: 100px;
+}
+
+#rightside{
+	margin-left: 140px;
+	/*border: 1px solid #666666;*/
+}
+
+#banner{
+	padding: 20px;
+	height: 100px;
+}
+
+#content{
+	padding: 20px;
+}
+
+
+#footer{
+	clear: both;
+	text-align: center;
+	border: 1px solid #C0C0C0;
+}
+
