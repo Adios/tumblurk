@@ -1,11 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
   map.resource :session, :controller => :main, :only => %w(new create destroy), :member => { :forgot => :post }
-  map.resources :users, :except => %(index) do |user|
-    user.resources :tags, :only => %(show)
+
+  map.resources :users, :except => %w(index) do |user|
+    user.resources :tags, :only => %w(show index)
   end
-  map.resources :tags, :only => %(show)
-  map.resources :posts, :except => %(new index)
+  map.resources :tags, :only => %w(show index)
+  
+  map.resources :posts, :except => %w(index)
   map.connect 'posts/new/:type', :controller => 'posts', :action => 'new', :conditions => { :method => :get }
+
+  map.resources :blogs, :only => %w(create update destroy)
+  map.connect 'blogs/:name', :controller => 'blogs', :action => 'show', :conditions => { :method => :get }
   
   # The priority is based upon order of creation: first created -> highest priority.
 
