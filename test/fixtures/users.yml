@@ -1,19 +1,19 @@
 adios:
-    id: 10000001
+    id: 1
     login: adios
     salt: 1000
     email: adiosf6f@gmail.com
     hashed_password: <%= Digest::SHA1.hexdigest('testtest' + '1000') %>
     
 cindera:
-    id: 10002
+    id: 2
     login: cindera
     salt: 1000
     email: cinera19@gmail.com
     hashed_password: <%= Digest::SHA1.hexdigest('testtest' + '1000') %>
     
 flachesis:
-    id: 999999
+    id: 3
     login: flachesis
     salt: 1000
     email: xxxx@gmail.com

@@ -1,0 +1,19 @@
+adios:
+    user_id: 1
+    blog_id: 1
+cindera:
+    user_id: 2
+    blog_id: 2
+adios_in_wamgl:
+    user_id: 1
+    blog_id: 3
+cindera_in_wamgl:
+    user_id: 2
+    blog_id: 3
+adios_in_secret_wamgl:
+    user_id: 1
+    blog_id: 4
+flachesis_in_secret_wamgl:
+    user_id: 3
+    blog_id: 4
+        

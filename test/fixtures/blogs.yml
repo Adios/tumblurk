@@ -1,0 +1,27 @@
+adios:
+    id: 1
+    name: adios
+    title: f6f blog
+    description: this is my blog at ccu
+    default_blog: t
+cindera:
+    id: 2
+    name: cindera
+    title: cindera blog
+    description: this is cindera at ccu
+    default_blog: t
+wamgl:
+    id: 3
+    name: wamgl
+    title: WAMGL
+    description: this is wmagl at ccu
+private_wamgl:
+    id: 4
+    name: private-wamgl
+    title: Secret WAMGL
+    description: this is a secret place.
+    private: t
+flachesis:
+    id: 5
+    name: flac
+    default_blog: t

@@ -9,19 +9,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 5) do
+ActiveRecord::Schema.define(:version => 6) do
+
+  create_table "blogs", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.string   "description"
+    t.boolean  "private"
+    t.boolean  "default_blog"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "blogs_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "blog_id"
+  end
 
   create_table "posts", :force => true do |t|
     t.integer  "post_type"
     t.text     "head"
     t.text     "body"
-    t.binary   "visible",    :default => "t"
+    t.boolean  "visible",    :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "publish_at"
     t.integer  "user_id"
     t.string   "session"
     t.integer  "post_id"
+    t.integer  "blog_id"
   end
 
   create_table "posts_tags", :id => false, :force => true do |t|

@@ -1,16 +1,21 @@
 class User < ActiveRecord::Base
   has_many :posts
   has_many :tags, :through => :posts
+  has_and_belongs_to_many :blogs
   
+  validates_presence_of :login, :email, :password, :password_confirmation
+  validates_confirmation_of :password
+  validates_uniqueness_of :login, :email, :case_sensitive => false
   validates_length_of :login, :within => 3..32
   validates_length_of :password, :within => 5..64
-  validates_presence_of :login, :email, :password, :password_confirmation
-  validates_uniqueness_of :login, :email, :case_sensitive => false
+  validates_format_of :login, :with => /^[-a-zA-Z0-9]+$/, :message => "Invalid format of login."
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid format of email address."
-  validates_confirmation_of :password
   
   attr_accessor :password, :password_confirmation
   attr_protected :id, :salt
+  
+  after_create :create_default_blog
+  before_destroy :destroy_all_blogs
 
   def password=(pass)
     @password = pass
@@ -40,6 +45,18 @@ class User < ActiveRecord::Base
   end
     
   protected
+  
+  def destroy_all_blogs
+    blogs.each { |b| b.delete }
+    blogs.clear
+  end
+  
+  def create_default_blog
+    blog = Blog.new :name => login
+    blog.default_blog = true
+    blog.users << self
+    blog.save
+  end
   
   def self.encrypt(pass, salt)
     Digest::SHA1.hexdigest(pass + salt)

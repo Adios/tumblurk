@@ -88,8 +88,12 @@ class UserTest < ActiveSupport::TestCase
     u.login = ''
     assert !u.save
     assert u.errors.invalid?('login')
+    # invalid format
+    u.login = '123.abc'
+    assert !u.save
+    assert u.errors.invalid?('login')
     # ok
-    u.login = 'valid_login'
+    u.login = 'valid-login-312'
     assert u.save
     assert u.errors.empty?
     # no email
@@ -100,6 +104,25 @@ class UserTest < ActiveSupport::TestCase
     u.email = 'notavalidemail'
     assert !u.save
     assert u.errors.invalid?('email')
+  end
+  
+  test 'new account should also trigger creation of new blog' do
+    u = User.new :login => 'adios-f6f', :email => 'tht96@gais.cs.ccu.edu.tw'
+    u.password = u.password_confirmation = 'validpassword'
+    assert_difference 'Blog.count' do
+      assert u.save
+      assert_equal 1, u.blogs.count
+    end
+    # update account will not trigger it
+    u.email = 'tht97@gais.cs.ccu.edu.tw'
+    assert_no_difference 'Blog.count' do
+      assert u.save
+      assert_equal 1, u.blogs.count
+    end
+    # delete user account should also delete blog
+    assert_difference 'Blog.count', -1 do
+      assert u.destroy
+    end
   end
   
   test 'login and email can not be duplicated' do

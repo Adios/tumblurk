@@ -2,7 +2,8 @@ adios:
     post_type: 1
     head: this is a post
     body: an important post!
-    user_id: 10000001
+    user_id: 1
+    blog_id: 1
     id: 1
     visible: true
     created_at: <%= Time.now - 86400 - 5000 %>
@@ -11,7 +12,8 @@ adios_hidden:
     post_type: 1
     head: this is a hidden post
     body: you shouldnt see me
-    user_id: 10000001
+    user_id: 1
+    blog_id: 1
     id: 2
     visible: false
     created_at: <%= Time.now - 86400 - 4000 %>
@@ -20,7 +22,8 @@ flachesis:
     post_type: 2
     head: this is 2 post
     body: hi
-    user_id: 999999
+    user_id: 3
+    blog_id: 4
     id: 3
     session: abc
     created_at: <%= Time.now - 86400 - 3000 %>
@@ -29,7 +32,8 @@ cindera:
     post_type: 2
     head: this is 3 post
     body: lo
-    user_id: 10002
+    user_id: 2
+    blog_id: 3
     id: 4
     post_id: 1
     created_at: <%= Time.now - 86400 - 2000 %>
@@ -38,7 +42,8 @@ cindera_no_head:
     post_type: 4
     head: i have no head
     body: yo yoyo no head
-    user_id: 10002
+    user_id: 2
+    blog_id: 3
     id: 5
     post_id: 0
     created_at: <%= Time.now - 86400 - 1000 %>
