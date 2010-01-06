@@ -1,6 +1,11 @@
 require 'test_helper'
 
-class UsersControllerTest < ActionController::TestCase  
+class UsersControllerTest < ActionController::TestCase
+  def setup
+    @adios = users(:adios)
+    @cindera = users(:cindera)
+  end  
+  
   test 'editing user information requires authenticaion' do
     # not logged in
     get :edit, { :id => @adios.id }

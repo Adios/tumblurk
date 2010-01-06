@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class PostTest < ActiveSupport::TestCase
+  def setup
+    @adios = users(:adios)
+    @post_one = posts(:adios)
+  end
+
   test 'create posts' do
     # out of type
     p = Post.new :post_type => 100, :head => 'hi', :body => 'lo'

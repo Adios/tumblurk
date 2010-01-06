@@ -1,12 +1,12 @@
-p_t_1:
+one:
     post_id: 1
     tag_id: 1
-p_t_2:
+two:
     post_id: 2
     tag_id: 1
-p_t_3:
+three:
     post_id: 1
     tag_id: 2
-p_t_4:
+four:
     post_id: 2
     tag_id: 2

@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
+  def setup
+    @adios = users(:adios)
+    @cindera = users(:cindera)
+  end
+  
   test "create post" do
     # not logged in
     assert_no_difference 'Post.count' do
@@ -14,10 +19,10 @@ class PostsControllerTest < ActionController::TestCase
     assert_response :redirect
     # create a repost
     assert_difference 'Post.count' do
-      post :create, { :post => { :post_type => '1', :post_id => @post_one.id } }, { :user_id => @adios.id }
+      post :create, { :post => { :post_type => '1', :post_id => posts(:adios).id } }, { :user_id => @adios.id }
     end
-    assert_equal @post_one.id, assigns(:post).post_id
-    assert_equal @post_one.session, assigns(:post).session
+    assert_equal posts(:adios).id, assigns(:post).post_id
+    assert_equal posts(:adios).session, assigns(:post).session
     # create an invalid repost, should be treated as a fresh post.
     assert_difference 'Post.count' do
       post :create, { :post => { :post_type => '1', :post_id => '123' } }, { :user_id => @adios.id }

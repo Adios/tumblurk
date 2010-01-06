@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class MainControllerTest < ActionController::TestCase
+  def setup
+    @adios = users(:adios)
+  end
+  
   test "login and logout" do
     # failure
     post :create, { :session => { :login => @adios.login, :password => '123123' } }

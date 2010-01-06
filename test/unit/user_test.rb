@@ -2,6 +2,11 @@ require 'test_helper'
 require 'digest/sha1'
 
 class UserTest < ActiveSupport::TestCase
+  def setup
+    @adios = users(:adios)
+    @cindera = users(:cindera)
+  end
+  
   test 'encrypt() & hashed generation' do
     u = User.new :login => 'soida', :email => 'adios@adios.com'
     u.salt = '1000'

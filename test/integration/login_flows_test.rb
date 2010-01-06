@@ -3,6 +3,10 @@ require 'test_helper'
 class LoginFlowsTest < ActionController::IntegrationTest
   fixtures :all
   
+  def setup
+    @adios = users(:adios)
+  end
+  
   test "User signup" do
     get new_user_path
     assert_response :success

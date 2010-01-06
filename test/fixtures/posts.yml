@@ -1,4 +1,4 @@
-post_one:
+adios:
     post_type: 1
     head: this is a post
     body: an important post!
@@ -7,7 +7,7 @@ post_one:
     visible: true
     created_at: <%= Time.now - 86400 - 5000 %>
     session: abc
-hidden_post_one:
+adios_hidden:
     post_type: 1
     head: this is a hidden post
     body: you shouldnt see me
@@ -16,7 +16,7 @@ hidden_post_one:
     visible: false
     created_at: <%= Time.now - 86400 - 4000 %>
     session: cdf
-post_two:
+flachesis:
     post_type: 2
     head: this is 2 post
     body: hi
@@ -25,7 +25,7 @@ post_two:
     session: abc
     created_at: <%= Time.now - 86400 - 3000 %>
     post_id: 1
-post_three:
+cindera:
     post_type: 2
     head: this is 3 post
     body: lo
@@ -34,7 +34,7 @@ post_three:
     post_id: 1
     created_at: <%= Time.now - 86400 - 2000 %>
     session: abc
-a_cut_head_post:
+cindera_no_head:
     post_type: 4
     head: i have no head
     body: yo yoyo no head
