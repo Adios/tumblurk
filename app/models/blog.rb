@@ -11,8 +11,13 @@ class Blog < ActiveRecord::Base
   
   before_destroy :default_blog_cannot_be_deleted
   before_save :default_blog_cannot_be_a_group
+  after_save :empty_blog_should_be_removed
   
   protected 
+  
+  def empty_blog_should_be_removed
+    self.destroy if users.count == 0
+  end
   
   def default_blog_cannot_be_deleted
     if default_blog

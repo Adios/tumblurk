@@ -66,4 +66,12 @@ class BlogTest < ActiveSupport::TestCase
     assert_not_equal 100, blog.id
     assert_not_equal true, blog.default_blog?
   end
+  
+  test 'group blog should be destroyed as no one inside' do
+    assert blogs(:wamgl).users.delete(users(:adios))
+    assert blogs(:wamgl).users.delete(users(:cindera))
+    assert_difference 'Blog.count', -1 do
+      assert blogs(:wamgl).save
+    end
+  end
 end
