@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :posts, :except => %w(index)
   map.connect 'posts/new/:type', :controller => 'posts', :action => 'new', :conditions => { :method => :get }
 
+  map.resources :blogs, :only => %w(update), :member => { :invite => :post }
   map.resources :blogs, :only => %w(create update destroy)
   map.connect 'blogs/:name', :controller => 'blogs', :action => 'show', :conditions => { :method => :get }
   
