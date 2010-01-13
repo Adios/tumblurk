@@ -1,0 +1,25 @@
+h1 {
+	font-size: 600%;
+	text-align: center;
+}
+
+fieldset.post {
+	padding: 0 3em;
+	padding-bottom: 1em;
+}
+
+fieldset {
+	background-color: #f7f7ff;
+	border: 1px solid #e7e7ff;
+}
+legend {
+	border: 1px solid white;
+	padding: 5px;
+	margin-left: 60%;
+	font-size: 120%;
+	background: #e7e7ff;
+}
+
+body {
+	padding: 0 15%;
+}

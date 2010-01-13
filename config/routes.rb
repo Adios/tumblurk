@@ -10,8 +10,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :posts, :except => %w(index)
   map.connect 'posts/new/:type', :controller => 'posts', :action => 'new', :conditions => { :method => :get }
 
-  map.resources :blogs, :requirements => { :id => /[0-9a-zA-Z]{5,}/ }
-  map.invite 'blogs/:id/invite', :controller => 'blogs', :action => 'invite', :conditions => { :method => :post }, :requirements => { :id => /[0-9a-zA-Z]{5,}/ }
+  map.resources :blogs, :requirements => { :id => /[a-zA-Z]+[0-9a-zA-Z]{4,}(-[0-9a-zA-Z]+)*/ }
+  map.invite 'blogs/:id/invite', :controller => 'blogs', :action => 'invite', :conditions => { :method => :post }, :requirements => { :id => /[a-zA-Z]+[0-9a-zA-Z]{4,}(-[0-9a-zA-Z]+)*/ }
 
   
   # The priority is based upon order of creation: first created -> highest priority.

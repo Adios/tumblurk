@@ -3,7 +3,13 @@
 <% end %>
 
 <div id="sidebar" class="left">
-	side
+	<h2>blogs</h2>
+	<ul>
+	<% @blogs.each do |blog| %>
+		<li><%= link_to blog.name, blog_path(blog.name), :target => '_blank' %></li>
+	<% end %>
+	</ul>
+	<h2>+create another one</h2>
 </div>
 
 <div id="content" class="right">

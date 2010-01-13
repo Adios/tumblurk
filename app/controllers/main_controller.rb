@@ -54,6 +54,7 @@ class MainController < ApplicationController
   
   def dashboard
     @posts = Post.all :order => 'created_at DESC'
+    @blogs = @current_user.blogs
     render 'main', :layout => 'dashboard'
   end
 end

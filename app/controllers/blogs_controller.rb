@@ -7,8 +7,8 @@ class BlogsController < ApplicationController
     @blog = Blog.find_by_name(params[:id])
     
     if @blog.nil?
-      render :text => 'No such blog!'
-    else
+      flash[:error] = "Blog doesn't exist!"
+      redirect_to root_url
     end
   end
   

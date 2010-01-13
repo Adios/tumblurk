@@ -1,3 +1,6 @@
+ul, li {
+	list-style: none;
+}
 div.fieldWithErrors {
     outline: 2px solid #f00;
 }

@@ -1,0 +1,9 @@
+<% content_for :head do %>
+<%= stylesheet_link_tag 'blogs/show' %>
+<% end %>
+
+<h1><%= @blog.name %></h1>
+
+<div id="posts">
+	<%= render :partial => 'main/post', :collection => @blog.posts, :spacer => 'main/spacer' %>
+</div>

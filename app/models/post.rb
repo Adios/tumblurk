@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :user
-  belongs_to :post
+  belongs_to :blog
   has_and_belongs_to_many :tags
 
   validates_inclusion_of :post_type, :in => (1..6).to_a, :message => 'Undefined types!'
