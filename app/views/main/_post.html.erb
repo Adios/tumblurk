@@ -1,0 +1,55 @@
+<fieldset class="post">
+	<legend title="<%= post.updated_at.strftime('%H:%M, %Y/%m/%d') %>"><%= time_ago_in_words(post.updated_at, true) + ' ago' %></legend>
+
+	<div class="operation right">
+		<% if post.user_id == session[:user_id] %>
+			<%= link_to 'delete', post, :method => :delete %>
+		<% end %>
+		
+		<% if post.user_id == session[:user_id] %>
+			<%= link_to 'edit', edit_post_path(post) %>
+		<% end %>
+
+		<% unless post.user_id == session[:user_id] %>
+			<%= link_to 'reblog', new_post_path + '/' + post.id.to_s %>
+		<% end %>
+	</div>
+
+	<% unless post.head.blank? %>
+	<div class="head">
+		<%= post.head %>
+	</div>
+	<% end %>
+	
+	<% unless post.body.blank? %>
+	<div class="body">
+		<%= post.body %>
+	</div>
+	<% end %>
+	
+	<div class="note right">
+		<% if post.user_id? %>
+			<% if post.user_id == session[:user_id] %>
+				you
+			<% else %>
+				<%= link_to post.user.login, user_path(post.user) %>
+			<% end %>
+		<% else %>
+			someone
+		<% end %>
+
+		<% if post.post_id %>
+		reblogged from
+			<% if exists(post.post_id) %>
+				<%= link_to Post.find_by_id(post.post_id).user.login, post_path(post.post_id) %>
+			<% else %>
+				someone
+			<% end %>
+		<% else %>
+		posted this
+		<% end %>
+	</div>
+
+
+ 	a <%= post_type post.post_type %> post
+</fieldset>

@@ -1,6 +1,6 @@
 class MainController < ApplicationController
-  before_filter :redirect_logged, :only => %w(new forgot create)
-  before_filter :login_required, :only => %w(destroy)
+  before_filter :redirect_logged, :only => %w(index forgot create)
+  before_filter :login_required, :only => %w(destroy dashboard)
   
   def index
   end
@@ -22,10 +22,10 @@ class MainController < ApplicationController
       session[:user_login] = u.login
       @current_user = User.find(session[:user_id])
       flash[:notice] = 'hi, again!'
-      redirect_to u
+      redirect_to :action => 'dashboard'
     else
       flash[:error] = 'Invalid login or password.'
-      render :new
+      redirect_to root_url
     end
   end
   
@@ -50,5 +50,10 @@ class MainController < ApplicationController
     else
       flash[:error] = "Couldn't send password."
     end
+  end
+  
+  def dashboard
+    @posts = Post.all :order => 'created_at DESC'
+    render 'main', :layout => 'dashboard'
   end
 end

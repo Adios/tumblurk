@@ -1,0 +1,22 @@
+#user_name, #user_login, #user_password, #user_password_confirmation, #user_email {
+	border: 1px solid #ccf;
+	width: 150px;
+	color: #37f;
+}
+
+#user_submit {
+	padding: 0 10px;
+	background-color: #fff0c3;
+	border: 1px outset;
+}
+
+a:visited {
+	color: #37f;
+}
+a {
+	color: #37f;
+	text-decoration: none;
+}
+input:focus {
+	outline: 5px solid #ddf;
+}

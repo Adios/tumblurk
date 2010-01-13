@@ -1,2 +1,38 @@
-<h1>Main#index</h1>
-<p>Find me in app/views/main/index.html.erb</p>
+<% content_for :head do %>
+<%= stylesheet_link_tag 'main' %>
+<% end %>
+
+<% form_for :session, @user, :url => session_path do |f| %>
+	<div id="splash">
+		Welcome to Tumblurk!
+	</div>
+
+	<% if flash[:error] %>
+		<div id="errorExplanation" style="font-size: 50%;">
+		<h2><%= flash[:error] %></h2>
+		</div>
+	<% end %>
+
+
+	<div id="content">	
+		<div>
+		<label class="left" for="session_login">Login</label>
+		<%= f.text_field :login, :size => 32, :class => 'right' %>
+		</div>
+		
+		<div class="clear"></div>
+		
+		<div style="margin-top: 0.6em;">
+		<label class="left" for="session_password">Password</label>
+		<%= f.password_field :password, :size => 64, :class => 'right' %>
+		</div>
+		
+		<div class="clear"></div>
+		
+		<div style="margin-top: 0.6em" class="right">
+		<%= f.submit 'Login' %> or <%= link_to 'Signup', new_user_path %>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+<% end %>

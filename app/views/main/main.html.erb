@@ -1,0 +1,18 @@
+<% content_for :head do %>
+	<%= stylesheet_link_tag 'dashboard/main' %>
+<% end %>
+
+<div id="sidebar" class="left">
+	side
+</div>
+
+<div id="content" class="right">
+	<div id="infobar">
+	make a post of <%= render :partial => 'type', :collection => (1 .. 6).to_a %>
+	</div>
+	
+	<%= render :partial => 'post', :collection => @posts, :spacer_template => 'spacer' %>
+</div>
+
+<div class="clear"></div>
+

@@ -1,0 +1,49 @@
+<% content_for :head do %>
+	<%= stylesheet_link_tag 'users/edit' %>
+<% end %>
+
+<% form_for @user do |f| %>
+	<div id="sidebar" class="left">
+		<%= f.error_messages :header_message => 'Oops!', :message => nil %>
+	</div>
+	
+	<div id="content" class="right">
+		<div id="infobar">
+		</div>
+		
+		<div>
+			<label class="left" for="user_login">Login</label>
+			<%= f.text_field :login, :size => 32, :class => 'right' %>
+		</div>
+		<div class="clear"></div>
+		
+		<div style="margin-top: 0.6em;">
+			<label class="left" for="user_email">Email</label>
+			<%= f.text_field :email, :size => 128, :class => 'right' %>
+		</div>
+		<div class="clear"></div>
+
+		<div style="margin-top: 0.6em;">
+			<label class="left" for="user_name">Name</label>
+			<%= f.text_field :name, :size => 32, :class => 'right' %>
+		</div>
+		<div class="clear"></div>
+		
+		<div style="margin-top: 0.6em;">
+			<label class="left" for="user_password">Password</label>
+			<%= f.password_field :password, :size => 128, :class => 'right' %>
+		</div>
+		<div class="clear"></div>
+		
+		<div style="margin-top: 0.6em;">
+			<label class="left" for="user_password_confirmation">Again</label>
+			<%= f.password_field :password_confirmation, :size => 128, :class => 'right' %>
+		</div>
+		<div class="clear"></div>
+		
+		<div class="right" style="margin-top: 0.6em;">
+		<%= f.submit 'Update' %>
+		</div>
+	</div>
+	<div class="clear"></div>
+<% end %>

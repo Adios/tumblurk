@@ -12,6 +12,8 @@ class PostsController < ApplicationController
     else
       @post.post_type = post_type params[:type]
     end
+    
+    render :layout => 'dashboard'
   end
   
   def show
@@ -21,6 +23,8 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     redirect_to @current_user unless @current_user.id == @post.user_id
+    
+    render :new, :layout => 'dashboard'
   end
   
   # <tt>POST /posts</tt>
@@ -34,9 +38,9 @@ class PostsController < ApplicationController
     
     respond_to do |format|
       if @post.valid? and @post.save!
-        format.html { redirect_to @current_user }
+        format.html { redirect_to :controller => 'main', :action => 'dashboard' }
       else
-        format.html
+        format.html { render :new, :layout => 'dashboard' }
       end
     end
   end

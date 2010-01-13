@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # <b>login required</b>
   def edit
     @user = @current_user
+    render :layout => 'dashboard'
   end
   
   # * <tt>GET /users/[ID]</tt>
@@ -31,7 +32,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       session[:user_login] = @user.login
       flash[:notice] = 'Hi'
-      redirect_to @user
+      redirect_to :controller => 'main', :action => 'dashboard'
     else
       render :new
     end
@@ -47,9 +48,10 @@ class UsersController < ApplicationController
     
     if @user.update_attributes(params[:user])
       flash[:notice] = 'Update successful!'
-      redirect_to @user
+      redirect_to :controller => 'main', :action => 'dashboard'
+      session[:user_login] = @user.login
     else
-      render :edit
+      render :edit, :layout => 'dashboard'
     end
   end
   

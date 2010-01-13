@@ -1,8 +1,0 @@
-<% form_for :session, @user, :url => session_path do |f| %>
-	<label for="session[login]">Login:</label>
-	<%= f.text_field :login, :size => 32 %>
-	<br>
-	<label for="session[password]">Password:</label>
-	<%= f.password_field :password, :size => 64 %>
-	<%= f.submit 'Login' %> or <%= link_to 'Signup', new_user_path %>
-<% end %>

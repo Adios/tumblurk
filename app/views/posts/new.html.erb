@@ -1,33 +1,33 @@
 <% form_for @post do |f| %>
-	<fieldset>
-		<legend>post</legend>
-		<br>
-		<p>
-			type: <%= post_type @post.post_type %>
-		</p>
-		<p>
-			<% if @post.post_id %>
-			original from
+	<div id="sidebar" class="left">
+		Publish at<br>
+		<%= f.datetime_select :publish_at %>
+		<%= f.error_messages :header_message => 'Oops!', :message => nil %>
+	</div>
+	
+	<div id="content" class="right">
+		<div id="infobar">
+			making a new <%= post_type @post.post_type %>
+			<% if @post.post_id? and not @post.post_id.blank? %>
+			from
 			<%= link_to "##{@post.post_id}", post_path(@post.post_id) %>
+				<%= f.hidden_field :post_id %>
+			<% else %>
+			...
 			<% end %>
-		</p>
-		<p>
-			title:
+		</div>
+		
+		<div style="text-align: center;">
+			<p style="text-align: left;">
+			Title (Optional)
+			</p>
 			<%= f.text_field :head %>
-		</p>
-		<p>
-			body:
-			<%= f.text_field :body %>
-		</p>
-		<p>
-			publish at:
-			<%= f.datetime_select :publish_at %>
-		</p>
+
+			<p style="text-align: left;">Body</p>
+			<%= f.text_area :body, :rows => 10 %>
+		</div>
 		<%= f.hidden_field :post_type %>
-		<%= f.hidden_field :post_id %>
-	</fieldset>
-	<fieldset>
-		<legend>tag</legend>
-	</fieldset>
-	<%= f.submit @post.post_id ? 'Repost' : 'Post' %>
+		<%= f.submit (controller.action_name == 'edit') ? 'Update' : (@post.post_id ? 'Repost' : 'Post') %>
+	</div>
+	<div class="clear"></div>
 <% end %>

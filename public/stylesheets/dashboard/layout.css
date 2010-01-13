@@ -1,0 +1,40 @@
+/* basic layout */
+html, body { 
+	height: 100%;
+}
+
+#wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -100px; 
+}
+
+#footer, #push {
+	height: 100px;
+}
+
+#header {
+	height: 70px;
+}
+
+/* advanced layout */
+#wrapper, #footer {
+	margin-left: 7%;
+	margin-right: 7%;
+}
+
+#sidebar {
+	width: 30%;
+}
+#content {
+	width: 70%;
+}
+#menubar {
+	width: 50%;
+	height: 100%;
+}
+#logo {
+	width: 50%;
+	height: 100%;
+}

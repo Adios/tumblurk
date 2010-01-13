@@ -1,9 +1,0 @@
-<% content_for :head do %>
-<style type="text/css">
-	a { display: inline; }
-</style>
-<% end %>
-<fieldset>
-	<%= render :partial => 'type', :collection => (1..6) %>
-</fieldset>
-<%= render :partial => 'post', :collection => @posts, :spacer_template => 'spacer' %>

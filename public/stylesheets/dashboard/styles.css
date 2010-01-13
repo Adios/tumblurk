@@ -1,0 +1,40 @@
+#logo {
+	background-color: #ccc;
+	text-align: center;
+	line-height: 70px;
+	font-size: 200%;
+}
+#menubar {
+	background-color: #eee;
+	text-align: right;
+}
+#sidebar {
+	background-color: #eee;
+}
+#body {
+	background-color: #f9f9f9;
+}
+#footer {
+	background-color: #ccc;
+}
+#infobar {
+	line-height: 50px;
+	text-align: right;
+	background-color: #ddd;
+}
+#post_head, #post_body {
+	width: 95%;
+	border: 1px solid #eef;
+	margin: 0 auto;
+}
+#post_head {
+	font-size: 150%;
+}
+#post_body {
+	
+}
+#post_submit {
+	float: right;
+	font-size: 150%;
+	border: 1px outset #eef;
+}

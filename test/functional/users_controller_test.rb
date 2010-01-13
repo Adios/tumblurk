@@ -4,6 +4,7 @@ class UsersControllerTest < ActionController::TestCase
   def setup
     @adios = users(:adios)
     @cindera = users(:cindera)
+    @dashboard_path = '/dashboard'
   end  
   
   test 'editing user information requires authenticaion' do
@@ -39,9 +40,7 @@ class UsersControllerTest < ActionController::TestCase
         :email => 'alison@alison.org' } }
     end
     assert_response :redirect
-    assert_redirected_to assigns(:user)
-    assert session[:user_id]
-    assert_not_equal session[:user_id], @adios.id
+    assert_redirected_to @dashboard_path
   end
   
   test 'update user information' do
