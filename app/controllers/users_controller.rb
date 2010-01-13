@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       session[:user_login] = @user.login
       flash[:notice] = 'Hi'
-      redirect_to :controller => 'main', :action => 'dashboard'
+      redirect_to dashboard_url
     else
       render :new
     end
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     
     if @user.update_attributes(params[:user])
       flash[:notice] = 'Update successful!'
-      redirect_to :controller => 'main', :action => 'dashboard'
+      redirect_to dashboard_url
       session[:user_login] = @user.login
     else
       render :edit, :layout => 'dashboard'
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
       flash[:notice] = 'You are terminated.'
       redirect_to root_url
     else
-      redirect_to @user
+      redirect_to dashboard_url
     end
   end
 end

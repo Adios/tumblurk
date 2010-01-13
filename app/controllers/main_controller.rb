@@ -22,7 +22,7 @@ class MainController < ApplicationController
       session[:user_login] = u.login
       @current_user = User.find(session[:user_id])
       flash[:notice] = 'hi, again!'
-      redirect_to :action => 'dashboard'
+      redirect_to dashboard_url
     else
       flash[:error] = 'Invalid login or password.'
       redirect_to root_url

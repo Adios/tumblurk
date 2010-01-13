@@ -5,7 +5,6 @@ class LoginFlowsTest < ActionController::IntegrationTest
   
   def setup
     @adios = users(:adios)
-    @dashboard_path = '/dashboard'
   end
   
   test "User signup" do
@@ -21,15 +20,15 @@ class LoginFlowsTest < ActionController::IntegrationTest
       :email => 'alison@alison.org',
       :password => 'alialiali',
       :password_confirmation => 'alialiali' } }
-    assert_equal @dashboard_path, path
+    assert_equal dashboard_path, path
     assert_equal assigns(:current_user).id, session[:user_id]
     # signed user want to log in.
     get_via_redirect root_url
-    assert_equal @dashboard_path, path
+    assert_equal dashboard_path, path
     assert_equal assigns(:current_user).id, session[:user_id]
     # signed user want to sign up again.
     get_via_redirect new_user_path
-    assert_equal @dashboard_path, path
+    assert_equal dashboard_path, path
     assert_equal assigns(:current_user).id, session[:user_id]
     # log out
     delete_via_redirect session_path
@@ -45,15 +44,15 @@ class LoginFlowsTest < ActionController::IntegrationTest
     assert_nil session[:user_id]
     # log in
     post_via_redirect session_path, { :session => { :login => @adios.login, :password => 'testtest' } }
-    assert_equal @dashboard_path, path
+    assert_equal dashboard_path, path
     assert_equal assigns(:current_user).id, session[:user_id]
     # logged user want to log in again
     get_via_redirect root_url
-    assert_equal @dashboard_path, path
+    assert_equal dashboard_path, path
     assert_equal assigns(:current_user).id, session[:user_id]
     # logged user want to sign up again
     get_via_redirect new_user_path
-    assert_equal @dashboard_path, path
+    assert_equal dashboard_path, path
     assert_equal assigns(:current_user).id, session[:user_id]
     # logout
     delete_via_redirect session_path

@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.resource :session, :controller => :main, :only => %w(create destroy), :member => { :forgot => :post }
-  map.connect '/dashboard', :controller => 'main', :action => 'dashboard'
+  map.dashboard '/dashboard', :controller => 'main', :action => 'dashboard'
 
   map.resources :users, :except => %w(index) do |user|
     user.resources :tags, :only => %w(show index)
@@ -10,9 +10,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :posts, :except => %w(index)
   map.connect 'posts/new/:type', :controller => 'posts', :action => 'new', :conditions => { :method => :get }
 
-  map.resources :blogs, :only => %w(update), :member => { :invite => :post }
-  map.resources :blogs, :only => %w(create update destroy)
-  map.connect 'blogs/:name', :controller => 'blogs', :action => 'show', :conditions => { :method => :get }
+  map.resources :blogs, :requirements => { :id => /[0-9a-zA-Z]{5,}/ }
+  map.invite 'blogs/:id/invite', :controller => 'blogs', :action => 'invite', :conditions => { :method => :post }, :requirements => { :id => /[0-9a-zA-Z]{5,}/ }
+
   
   # The priority is based upon order of creation: first created -> highest priority.
 

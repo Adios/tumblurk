@@ -38,7 +38,7 @@ class PostsController < ApplicationController
     
     respond_to do |format|
       if @post.valid? and @post.save!
-        format.html { redirect_to :controller => 'main', :action => 'dashboard' }
+        format.html { redirect_to dashboard_url }
       else
         format.html { render :new, :layout => 'dashboard' }
       end
@@ -56,11 +56,11 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.user == @current_user
         if @post.destroy
-          format.html { redirect_to @current_user }
+          format.html { redirect_to dashboard_url }
         end
       else
         flash[:error] = 'Do not try to hack me >.^'
-        format.html { redirect_to @current_user }
+        format.html { redirect_to dashboard_url }
       end
     end
   end
@@ -75,13 +75,12 @@ class PostsController < ApplicationController
     
     respond_to do |format|
       if @post.user == @current_user
-        if @post.update_attributes(params[:post])
-          format.html { redirect_to @current_user }
-        end
+        @post.update_attributes(params[:post])
       else
         flash[:error] = 'I am watching you!'
-        format.html { redirect_to @current_user }
       end
+      
+      format.html { redirect_to dashboard_url }
     end
   end
 end

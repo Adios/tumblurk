@@ -19,6 +19,6 @@ class ApplicationController < ActionController::Base
   
   # redirect to user page if the session has been set.
   def redirect_logged
-    redirect_to :controller => 'main', :action => 'dashboard' if session[:user_id]
+    redirect_to dashboard_url if session[:user_id]
   end
 end

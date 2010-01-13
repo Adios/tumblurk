@@ -4,7 +4,7 @@ class BlogsController < ApplicationController
   # display the blog of the given <b>name</b>. 
   # e.g. <tt>/blogs/soida</tt> will show up the blog which is named <b>soida</b>.
   def show
-    @blog = Blog.find_by_name(params[:name])
+    @blog = Blog.find_by_name(params[:id])
     
     if @blog.nil?
       render :text => 'No such blog!'
@@ -20,9 +20,9 @@ class BlogsController < ApplicationController
     @blog.users << @current_user
     
     if @blog.save
-      redirect_to @blog
+      redirect_to blog_path(@blog.name)
     else
-      redirect_to @current_user
+      redirect_to dashboard_url
     end
   end
   
@@ -31,7 +31,7 @@ class BlogsController < ApplicationController
   #
   # <tt>DELETE /blogs/:id</tt>
   def destroy
-    @blog = Blog.find_by_id(params[:id])
+    @blog = Blog.find_by_name(params[:id])
     
     respond_to do |format|
       if @blog.users.exists? @current_user
@@ -41,7 +41,7 @@ class BlogsController < ApplicationController
         flash[:notices] = 'You are already out.'
       end
       
-      format.html { redirect_to @current_user }
+      format.html { redirect_to dashboard_url }
     end
   end
   
@@ -49,19 +49,19 @@ class BlogsController < ApplicationController
   #
   # accept parameters: <tt>PUT + params[:blog]</tt>
   def update
-    @blog = Blog.find_by_id(params[:id])
+    @blog = Blog.find_by_name(params[:id])
     
     respond_to do |format|
       if @blog.users.exists?(@current_user)
         if @blog.update_attributes(params[:blog])
           flash[:notices] = 'Ok'
-          format.html { redirect_to @blog }
+          format.html { redirect_to blog_path(@blog.name) }
         else
-          redirect_to @current_user
+          redirect_to dashboard_url
         end
       else
         flash[:notices] = 'You are not the member of this blog.'
-        format.html { redirect_to @current_user }
+        format.html { redirect_to dashboard_url }
       end
     end
   end
@@ -71,7 +71,7 @@ class BlogsController < ApplicationController
   # <tt>POST /blogs/:id/invite</tt>
   # accept parameters: <tt>params[:user][:login]</tt>
   def invite
-    @blog = Blog.find_by_id(params[:id])
+    @blog = Blog.find_by_name(params[:id])
     @user = User.find_by_login(params[:user][:login])
     
     respond_to do |format|
@@ -85,7 +85,7 @@ class BlogsController < ApplicationController
         else
           @blog.users << @user
           @blog.save
-          format.html { redirect_to @blog }
+          format.html { redirect_to blog_path(@blog.name) }
         end
       else
         format.html { render :text => '' }
