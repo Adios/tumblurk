@@ -6,10 +6,26 @@
 	<h2>blogs</h2>
 	<ul>
 	<% @blogs.each do |blog| %>
-		<li><%= link_to blog.name, blog_path(blog.name), :target => '_blank' %></li>
+		<li>
+		<% if @blog and @blog.name == blog.name %>
+			<%= render :partial => 'blog', :object => @blog %>
+		<% else %>
+			<%= link_to blog.name, dashboard_blog_path(blog.name) %>
+		<% end %>
+		<%= link_to '→', blog_path(blog.name), :target => '_blank' %>
+		</li>
 	<% end %>
 	</ul>
 	<h2><%= link_to 'create another one', new_blog_path %></h2>
+	
+	<% if flash[:message] or flash[:notice] or flash[:error] %>
+	<h2>status</h2>
+	<div id="errorExplanation" style="font-size: 80%; margin: 0 0.5em; width: 95%;">
+		<%= flash[:message] %>
+		<%= flash[:error] %>
+		<%= flash[:notice] %>
+	</div>
+	<% end %>
 </div>
 
 <div id="content" class="right">

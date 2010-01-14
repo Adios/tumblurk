@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resource :session, :controller => :main, :only => %w(create destroy), :member => { :forgot => :post }
-  map.dashboard '/dashboard', :controller => 'main', :action => 'dashboard'
+  map.dashboard '/dashboard', :controller => 'main', :action => 'dashboard', :conditions => { :method => :get }
+  map.dashboard_blog'/dashboard/:name', :controller => 'main', :action => 'dashboard_for_blog', :conditions => { :method => :get }
 
   map.resources :users, :except => %w(index) do |user|
     user.resources :tags, :only => %w(show index)

@@ -21,11 +21,11 @@ class BlogsControllerTest < ActionController::TestCase
     blog = Blog.find_by_name('olympus')
     post :invite, { :id => blog.name, :user => { :login => @cindera.login } }, { :user_id => @adios.id }
     assert_response :redirect
-    assert_redirected_to blog_path(assigns(:blog).name)
+    assert_redirected_to dashboard_blog_path(assigns(:blog).name)
     # cindera invite flachesis
     post :invite, { :id => blog.name, :user => { :login => @flachesis.login } }, { :user_id => @cindera.id }
     assert_response :redirect
-    assert_redirected_to blog_path(assigns(:blog).name)
+    assert_redirected_to dashboard_blog_path(assigns(:blog).name)
     assert_equal 3, Blog.find_by_name('olympus').users.count
     # adios left
     assert_difference "Blog.find_by_name('olympus').users.count", -1 do

@@ -1,0 +1,20 @@
+<%= blog.name %>
+<ul>
+	<li><%= link_to 'edit', edit_blog_path(blog.name) %></li>
+	
+	<% unless blog.default_blog? %>
+		<li><%= link_to 'quit', blog_path(blog.name), :method => :delete %></li>
+		<h2>members</h2>
+
+		<% blog.users.each do |user| %>
+		<li><%= link_to user.login, blog_path(user.login) %></li>
+		<% end %>
+		<li>
+		<% form_for :blog, :url => invite_path(blog.name) do |f| %>
+			<input name="user[login]" id="user_login" style="font-size: 150%; width: 70%; border: 1px solid #ccc;">
+			<%= f.submit 'invite' %>
+		<% end %>
+		<div class="clear"></div>
+		</li>
+	<% end %>
+</ul>

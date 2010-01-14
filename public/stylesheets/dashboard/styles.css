@@ -38,3 +38,7 @@
 	font-size: 150%;
 	border: 1px outset #eef;
 }
+
+input:focus, textarea:focus {
+	outline: 5px solid #ddf;
+}

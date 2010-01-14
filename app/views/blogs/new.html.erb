@@ -1,4 +1,6 @@
-<% form_for @blog do |f| %>
+<% form_for :blog, 
+			:url => (controller.action_name == 'edit') ? blog_path(@blog.name) : blogs_path, 
+			:html => { :method => (controller.action_name == 'edit') ? :put : :post } do |f| %>
 	<div id="sidebar" class="left">
 		Private? <%= f.check_box :private %>
 
@@ -24,7 +26,7 @@
 			<div class="clear"></div>
 		</div>
 
-		<%= f.submit 'make', :class => 'right' %>
+		<%= f.submit (controller.action_name == 'edit') ? 'update' : 'make', :class => 'right' %>
 	</div>
 	<div class="clear"></div>
 <% end %>

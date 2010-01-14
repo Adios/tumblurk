@@ -23,5 +23,5 @@ private_wamgl:
     private: t
 flachesis:
     id: 5
-    name: flac
+    name: flachesis
     default_blog: t

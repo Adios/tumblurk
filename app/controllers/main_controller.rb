@@ -1,6 +1,6 @@
 class MainController < ApplicationController
   before_filter :redirect_logged, :only => %w(index forgot create)
-  before_filter :login_required, :only => %w(destroy dashboard)
+  before_filter :login_required, :only => %w(destroy dashboard dashboard_for_blog)
   
   def index
   end
@@ -56,5 +56,18 @@ class MainController < ApplicationController
     @posts = Post.all :order => 'created_at DESC'
     @blogs = @current_user.blogs
     render 'main', :layout => 'dashboard'
+  end
+  
+  def dashboard_for_blog
+    @blogs = @current_user.blogs
+    @blog = Blog.find_by_name params[:name]
+    
+    if @blog and @blog.users.exists?(@current_user)
+      @posts = @blog.posts
+      render 'main', :layout => 'dashboard'
+    else
+      flash[:error] = "Blog doesn't exist or you didn't participate in."
+      redirect_to dashboard_url
+    end
   end
 end

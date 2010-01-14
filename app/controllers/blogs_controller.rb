@@ -31,6 +31,16 @@ class BlogsController < ApplicationController
     end
   end
   
+  def edit
+    @blog = Blog.find_by_name(params[:id])
+    
+    if @blog.nil?
+      redirect_to dashboard_path
+    else
+      render :new, :layout => 'dashboard'
+    end
+  end
+  
   # to leave the current blog. 
   # if a blog contains no members, it will be destroyed automatically later.
   #
@@ -39,14 +49,17 @@ class BlogsController < ApplicationController
     @blog = Blog.find_by_name(params[:id])
     
     respond_to do |format|
-      if @blog.users.exists? @current_user
+      if @blog.default_blog?
+        flash[:message] = 'You cannot quit your own blog.'
+      elsif @blog.users.exists? @current_user
         @blog.users.delete @current_user
         @blog.save
+        flash[:message] = 'You are not the member of the group anymore.'
       else
-        flash[:notices] = 'You are already out.'
+        flash[:message] = 'You are already out.'
       end
       
-      format.html { redirect_to dashboard_url }
+      format.html { redirect_to dashboard_path }
     end
   end
   
@@ -60,7 +73,7 @@ class BlogsController < ApplicationController
       if @blog.users.exists?(@current_user)
         if @blog.update_attributes(params[:blog])
           flash[:notices] = 'Ok'
-          format.html { redirect_to blog_path(@blog.name) }
+          format.html { redirect_to dashboard_blog_path(@blog.name) }
         else
           redirect_to dashboard_url
         end
@@ -81,19 +94,26 @@ class BlogsController < ApplicationController
     
     respond_to do |format|
       if @blog.nil?
-        format.html { render :text => 'no such blog.' }
+        flash[:message] = 'No such blog.'
+        format.html { redirect_to dashboard_path }
       elsif @user.nil?
-        format.html { render :text => 'no such user.' }
+        flash[:message] = "User doesn't exist."
+        format.html { redirect_to dashboard_blog_path(@blog.name) }
       elsif @blog.users.exists?(@current_user)
-        if @blog.users.exists?(@user)
-          format.html { render :text => 'already inside' }
+        if @blog.default_blog?
+          flash[:message] = "You cannot invite others to your own blog."
+          format.html { redirect_to dashboard_blog_path(@blog.name) }
+        elsif @blog.users.exists?(@user)
+          flash[:message] = "User has been the member of the group."
+          format.html { redirect_to dashboard_blog_path(@blog.name) }
         else
           @blog.users << @user
           @blog.save
-          format.html { redirect_to blog_path(@blog.name) }
+          flash[:message] = 'Invited!'
+          format.html { redirect_to dashboard_blog_path(@blog.name) }
         end
       else
-        format.html { render :text => '' }
+        format.html { redirect_to dashboard_path }
       end
     end
   end
