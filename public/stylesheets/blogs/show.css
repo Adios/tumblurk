@@ -3,6 +3,11 @@ h1 {
 	text-align: center;
 }
 
+h2 {
+	text-align: right;
+	margin-bottom: 3em;
+}
+
 fieldset.post {
 	padding: 0 3em;
 	padding-bottom: 1em;
@@ -22,4 +27,11 @@ legend {
 
 body {
 	padding: 0 15%;
+	position: relative;
+}
+
+#menubar {
+	position: absolute;
+	right: 0;
+	top: 0;
 }

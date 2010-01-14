@@ -9,7 +9,7 @@
 		<li><%= link_to blog.name, blog_path(blog.name), :target => '_blank' %></li>
 	<% end %>
 	</ul>
-	<h2>+create another one</h2>
+	<h2><%= link_to 'create another one', new_blog_path %></h2>
 </div>
 
 <div id="content" class="right">

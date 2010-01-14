@@ -1,6 +1,11 @@
 class BlogsController < ApplicationController
   before_filter :login_required, :except => %w(show)
   
+  def new
+    @blog = Blog.new
+    render :layout => 'dashboard'
+  end
+  
   # display the blog of the given <b>name</b>. 
   # e.g. <tt>/blogs/soida</tt> will show up the blog which is named <b>soida</b>.
   def show
@@ -22,7 +27,7 @@ class BlogsController < ApplicationController
     if @blog.save
       redirect_to blog_path(@blog.name)
     else
-      redirect_to dashboard_url
+      render :new, :layout => 'dashboard'
     end
   end
   

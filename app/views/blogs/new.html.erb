@@ -1,0 +1,30 @@
+<% form_for @blog do |f| %>
+	<div id="sidebar" class="left">
+		Private? <%= f.check_box :private %>
+
+		<%= f.error_messages :header_message => 'Oops!', :message => nil %>
+	</div>
+	
+	<div id="content" class="right">
+		<div id="infobar">
+			making a new blog...
+		</div>
+	
+		<div>
+			<div style="text-align: left;">Name</div>
+			<%= f.text_field :name %>
+			<div class="clear"></div>
+			
+			<div style="text-align: left;">Title</div>
+			<%= f.text_field :title %>
+			<div class="clear"></div>
+			
+			<div style="text-align: left;">Description</div>
+			<%= f.text_area :description, :rows => 5 %>
+			<div class="clear"></div>
+		</div>
+
+		<%= f.submit 'make', :class => 'right' %>
+	</div>
+	<div class="clear"></div>
+<% end %>

@@ -2,7 +2,14 @@
 <%= stylesheet_link_tag 'blogs/show' %>
 <% end %>
 
-<h1><%= @blog.name %></h1>
+<div id="menubar">
+	<%= link_to 'tumblurk', root_url %>
+</div>
+
+<h1><%= @blog.title? ? @blog.title : @blog.name %></h1>
+<% if @blog.description? %>
+<h2><%= @blog.description %></h2>
+<% end %>
 
 <div id="posts">
 	<%= render :partial => 'main/post', :collection => @blog.posts, :spacer => 'main/spacer' %>

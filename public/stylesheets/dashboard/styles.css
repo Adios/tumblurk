@@ -22,18 +22,18 @@
 	text-align: right;
 	background-color: #ddd;
 }
-#post_head, #post_body {
+#post_head, #post_body, #blog_name, #blog_title, #blog_description {
 	width: 95%;
 	border: 1px solid #eef;
 	margin: 0 auto;
 }
-#post_head {
+#post_head, #blog_name {
 	font-size: 150%;
 }
 #post_body {
 	
 }
-#post_submit {
+#post_submit, #blog_submit {
 	float: right;
 	font-size: 150%;
 	border: 1px outset #eef;
