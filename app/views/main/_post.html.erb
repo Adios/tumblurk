@@ -38,10 +38,10 @@
 			someone
 		<% end %>
 
-		<% if post.post_id %>
+		<% if post.origin %>
 		reblogged from
-			<% if exists(post.post_id) %>
-				<%= link_to Post.find_by_id(post.post_id).user.login, post_path(post.post_id) %>
+			<% if post.origin.destroyed? %>
+				<%= link_to post.origin.user.login, post_path(post.origin) %>
 			<% else %>
 				someone
 			<% end %>

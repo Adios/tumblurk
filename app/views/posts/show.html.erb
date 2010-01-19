@@ -5,10 +5,10 @@
 <p>created_at: <%= @post.created_at %></p>
 <p>publish_at: <%= @post.publish_at? ? @post.publish_at : nil %></p>
 <p>by: <%= @post.user_id? ? @post.user.login : 'someone' %></p>
-<p>
-	<% if @post.post_id %>
-	reposted from
-	<%= link_to_if exists(@post.post_id), ' #' + @post.post_id.to_s, post_path(@post.post_id) %>
+<p>	
+	<% if post.origin %>
+	reblogged from
+	<%= link_to_if post.origin.destroyed?, ' #' + @post.origin.id.to_s, post_path(@post.origin) %>
 	<% end %>
 </p>
 <p>

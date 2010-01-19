@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 6) do
     t.datetime "publish_at"
     t.integer  "user_id"
     t.string   "session"
-    t.integer  "post_id"
+    t.integer  "origin_id"
     t.integer  "blog_id"
   end
 

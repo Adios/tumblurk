@@ -14,22 +14,20 @@ class PostsControllerTest < ActionController::TestCase
     assert_response :redirect
     # logged in
     assert_difference 'Post.count' do
-      post :create, { :post => { :post_type => '1' } }, { :user_id => @adios.id }
+      post :create, { :post => { :post_type => '1', :blog_id => '1' } }, { :user_id => @adios.id }
     end
     assert_response :redirect
     # create a repost
     assert_difference 'Post.count' do
-      post :create, { :post => { :post_type => '1', :post_id => posts(:adios).id } }, { :user_id => @adios.id }
+      post :create, { :post => { :post_type => '1', :blog_id => '1', :origin_id => posts(:adios).id } }, { :user_id => @adios.id }
     end
-    assert_equal posts(:adios).id, assigns(:post).post_id
+    assert_equal posts(:adios), assigns(:post).origin
     assert_equal posts(:adios).session, assigns(:post).session
-    # create an invalid repost, should be treated as a fresh post.
-    assert_difference 'Post.count' do
-      post :create, { :post => { :post_type => '1', :post_id => '123' } }, { :user_id => @adios.id }
+    # create an invalid repost
+    assert_no_difference 'Post.count' do
+      post :create, { :post => { :post_type => '1', :origin_id => '123' } }, { :user_id => @adios.id }
     end
-    assert_nil assigns(:post).post_id
-    assert assigns(:post).session
-    assert_equal 1, Post.find_all_by_session(assigns(:post).session).count
+    assert_redirected_to dashboard_url
   end
 
   test "delete a post" do

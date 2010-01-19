@@ -22,7 +22,7 @@ class PostsController < ApplicationController
   
   def edit
     @post = Post.find(params[:id])
-    redirect_to @current_user unless @current_user.id == @post.user_id
+    redirect_to dashboard_url unless @current_user == @post.user
     
     render :new, :layout => 'dashboard'
   end
@@ -33,10 +33,18 @@ class PostsController < ApplicationController
   # currently only HTML response supported.
   def create
     @post = Post.new(params[:post])
-    @post.user_id = @current_user.id
-    @post.post_id = params[:post][:post_id]
+    @post.user = @current_user
+    @post.origin = Post.find_by_id(params[:post][:origin_id])    
     
     respond_to do |format|
+      begin
+        @post.blog = Blog.find(params[:post][:blog_id])
+        @post.blog.users.find(@current_user)
+      rescue ActiveRecord::RecordNotFound
+        flash[:error] = 'You have no permission to post to this blog.'
+        format.html { redirect_to dashboard_url }
+      end
+      
       if @post.valid? and @post.save!
         format.html { redirect_to dashboard_url }
       else
