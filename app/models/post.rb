@@ -1,4 +1,5 @@
-class Post < ActiveRecord::Base  
+class Post < ActiveRecord::Base 
+  @@kinds = %w(text photo link blurk audio video)
   belongs_to :user
   belongs_to :blog
   has_and_belongs_to_many :tags
@@ -6,11 +7,15 @@ class Post < ActiveRecord::Base
   belongs_to :origin, :class_name => 'Post'
 
   validates_presence_of :blog_id, :user_id, :kind
-  validates_inclusion_of :kind, :in => %w(text photo link blurk audio video), :message => 'invalid type!'
+  validates_inclusion_of :kind, :in => @@kinds, :message => 'invalid type!'
   validate_on_create :check_original_kind
   
-  attr_protected :id, :user_id, :origin_id, :session, :kind
+  attr_protected :id, :user_id, :origin_id, :session, :kind, :blog_id
   before_create :fill_session
+
+  def self.kinds
+    @@kinds
+  end
 
   protected
   

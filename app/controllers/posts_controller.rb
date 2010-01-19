@@ -5,6 +5,13 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @post.kind = params[:type]
+    
+    if session[:current_blog]
+      @post.blog = Blog.find(session[:current_blog])
+    else
+      @post.blog = @current_user.blogs.first
+    end
+    
     render :layout => 'dashboard'
   end
   
@@ -14,12 +21,11 @@ class PostsController < ApplicationController
     begin
       @post.origin = Post.find(params[:id])
       @post.kind = @post.origin.kind
+      render :new, :layout => 'dashboard'
     rescue ActiveRecord::RecordNotFound
       flash[:error] = 'No refereed post.'
       redirect_to dashboard_url
     end
-    
-    render :new, :layout => 'dashboard'
   end
   
   def show
@@ -47,15 +53,15 @@ class PostsController < ApplicationController
       begin
         @post.blog = Blog.find(params[:post][:blog_id])
         @post.blog.users.find(@current_user)
+        
+        if @post.valid? and @post.save!
+          format.html { redirect_to dashboard_url }
+        else
+          format.html { render :new, :layout => 'dashboard' }
+        end
       rescue ActiveRecord::RecordNotFound
         flash[:error] = 'You have no permission to post to this blog.'
         format.html { redirect_to dashboard_url }
-      end
-      
-      if @post.valid? and @post.save!
-        format.html { redirect_to dashboard_url }
-      else
-        format.html { render :new, :layout => 'dashboard' }
       end
     end
   end

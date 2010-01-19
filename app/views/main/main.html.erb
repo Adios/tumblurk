@@ -30,7 +30,7 @@
 
 <div id="content" class="right">
 	<div id="infobar">
-	make a post of <%= render :partial => 'type', :collection => (1 .. 6).to_a %>
+	make a post of <%= render :partial => 'type', :collection => Post.kinds %>
 	</div>
 	
 	<%= render :partial => 'post', :collection => @posts, :spacer_template => 'spacer' %>

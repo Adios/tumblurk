@@ -55,6 +55,7 @@ class MainController < ApplicationController
   def dashboard
     @posts = Post.all :order => 'created_at DESC'
     @blogs = @current_user.blogs
+    session[:current_blog] = nil
     render 'main', :layout => 'dashboard'
   end
   
@@ -64,6 +65,7 @@ class MainController < ApplicationController
     
     if @blog and @blog.users.exists?(@current_user)
       @posts = @blog.posts
+      session[:current_blog] = @blog.id
       render 'main', :layout => 'dashboard'
     else
       flash[:error] = "Blog doesn't exist or you didn't participate in."
