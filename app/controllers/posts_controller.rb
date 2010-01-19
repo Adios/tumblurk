@@ -2,18 +2,24 @@
 class PostsController < ApplicationController
   before_filter :login_required, :except => %w(show)
   
-  include ApplicationHelper
   def new
     @post = Post.new
-   
-    if params[:type].index /^[0-9]+$/
-      @post.post_id = params[:type]
-      @post.post_type = 1
-    else
-      @post.post_type = post_type params[:type]
+    @post.kind = params[:type]
+    render :layout => 'dashboard'
+  end
+  
+  def repost
+    @post = Post.new
+    
+    begin
+      @post.origin = Post.find(params[:id])
+      @post.kind = @post.origin.kind
+    rescue ActiveRecord::RecordNotFound
+      flash[:error] = 'No refereed post.'
+      redirect_to dashboard_url
     end
     
-    render :layout => 'dashboard'
+    render :new, :layout => 'dashboard'
   end
   
   def show
@@ -34,7 +40,8 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(params[:post])
     @post.user = @current_user
-    @post.origin = Post.find_by_id(params[:post][:origin_id])    
+    @post.origin = Post.find_by_id(params[:post][:origin_id])
+    @post.kind = params[:post][:kind]    
     
     respond_to do |format|
       begin

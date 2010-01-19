@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 6) do
   end
 
   create_table "posts", :force => true do |t|
-    t.integer  "post_type"
+    t.string   "kind"
     t.text     "head"
     t.text     "body"
     t.boolean  "visible",    :default => true

@@ -14,18 +14,23 @@ class PostsControllerTest < ActionController::TestCase
     assert_response :redirect
     # logged in
     assert_difference 'Post.count' do
-      post :create, { :post => { :post_type => '1', :blog_id => '1' } }, { :user_id => @adios.id }
+      post :create, { :post => { :kind => 'text', :blog_id => '1' } }, { :user_id => @adios.id }
     end
     assert_response :redirect
     # create a repost
     assert_difference 'Post.count' do
-      post :create, { :post => { :post_type => '1', :blog_id => '1', :origin_id => posts(:adios).id } }, { :user_id => @adios.id }
+      post :create, { :post => { :kind => 'text', :blog_id => '1', :origin_id => posts(:adios).id } }, { :user_id => @adios.id }
     end
     assert_equal posts(:adios), assigns(:post).origin
     assert_equal posts(:adios).session, assigns(:post).session
     # create an invalid repost
     assert_no_difference 'Post.count' do
-      post :create, { :post => { :post_type => '1', :origin_id => '123' } }, { :user_id => @adios.id }
+      post :create, { :post => { :kind => 'text', :origin_id => '123' } }, { :user_id => @adios.id }
+    end
+    assert_redirected_to dashboard_url
+    # create an invalid kind
+    assert_no_difference 'Post.count' do
+      post :create, { :post => { :kind => 'photo', :origin_id => posts(:adios).id } }, { :user_id => @adios.id }
     end
     assert_redirected_to dashboard_url
   end

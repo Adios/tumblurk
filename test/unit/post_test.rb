@@ -8,14 +8,16 @@ class PostTest < ActiveSupport::TestCase
   end
 
   test 'create posts' do
-    # type error, no blog, no user
-    p = Post.new :post_type => 100, :head => 'hi', :body => 'lo'
+    # no kind, no blog, no user
+    p = Post.new :head => 'hi', :body => 'lo'
+    p.kind = 'blah'
     assert !p.save
-    assert p.errors.invalid?('post_type')
+    assert p.errors.invalid?('kind')
     assert p.errors.invalid?('blog_id')
     assert p.errors.invalid?('user_id')
     # create a post, session must be uniqueness
-    p = Post.new :post_type => 1, :head => 'hi', :body => 'lo'
+    p = Post.new :head => 'hi', :body => 'lo'
+    p.kind = 'text'
     p.user = @adios
     p.blog = blogs(:adios)
     assert p.save
@@ -24,12 +26,17 @@ class PostTest < ActiveSupport::TestCase
   end
   
   test 'create a re-post' do
-    # a valid re-post
-    p = Post.new :post_type => 1, :head => 'a', :body => 'b'
-    p.origin = @post_one
+    # an invalid re-post
+    p = Post.new :head => 'a', :body => 'b'
+    p.kind = 'photo'
+    p.origin = @post_one # which is a text post
     p.user = @cindera
     p.blog = blogs(:cindera)
-    assert p.save!
+    assert !p.save
+    assert p.errors.invalid?('kind')
+    # a valid re-post
+    p.kind = @post_one.kind
+    assert p.save
     assert_equal @post_one.id, p.origin.id
     assert_equal @post_one.session, p.session
     # the refered post had been deleted

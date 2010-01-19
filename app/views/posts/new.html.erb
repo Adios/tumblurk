@@ -7,7 +7,7 @@
 	
 	<div id="content" class="right">
 		<div id="infobar">
-			making a new <%= post_type @post.post_type %>
+			making a new <%= @post.kind %>
 			<% if @post.post_id? and not @post.post_id.blank? %>
 			from
 			<%= link_to "##{@post.post_id}", post_path(@post.post_id) %>
@@ -26,7 +26,7 @@
 			<p style="text-align: left;">Body</p>
 			<%= f.text_area :body, :rows => 10 %>
 		</div>
-		<%= f.hidden_field :post_type %>
+		<%= f.hidden_field :kind %>
 		<%= f.submit (controller.action_name == 'edit') ? 'Update' : (@post.post_id ? 'Repost' : 'Post') %>
 	</div>
 	<div class="clear"></div>

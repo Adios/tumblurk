@@ -1,5 +1,5 @@
 adios:
-    post_type: 1
+    kind: text
     head: this is a post
     body: an important post!
     user_id: 1
@@ -9,7 +9,7 @@ adios:
     created_at: <%= Time.now - 86400 - 5000 %>
     session: abc
 adios_hidden:
-    post_type: 1
+    kind: text
     head: this is a hidden post
     body: you shouldnt see me
     user_id: 1
@@ -19,7 +19,7 @@ adios_hidden:
     created_at: <%= Time.now - 86400 - 4000 %>
     session: cdf
 flachesis:
-    post_type: 2
+    kind: photo
     head: this is 2 post
     body: hi
     user_id: 3
@@ -29,7 +29,7 @@ flachesis:
     created_at: <%= Time.now - 86400 - 3000 %>
     origin_id: 1
 cindera:
-    post_type: 2
+    kind: photo
     head: this is 3 post
     body: lo
     user_id: 2
@@ -39,7 +39,7 @@ cindera:
     created_at: <%= Time.now - 86400 - 2000 %>
     session: abc
 cindera_no_head:
-    post_type: 4
+    kind: blurk
     head: i have no head
     body: yo yoyo no head
     user_id: 2

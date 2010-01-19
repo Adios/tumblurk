@@ -1,7 +1,7 @@
 class CreatePosts < ActiveRecord::Migration
   def self.up
     create_table :posts do |t|
-      t.integer :post_type # 1 .. 6:  text, photo, link, blurk, audio, video
+      t.string :kind # text, photo, link, blurk, audio, video
       t.text :head
       t.text :body
       t.boolean :visible, :default => true

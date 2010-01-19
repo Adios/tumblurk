@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :tags, :only => %w(show index)
   
   map.resources :posts, :except => %w(index)
+  map.connect 'posts/new/:id', :controller => 'posts', :action => 'repost', :conditions => { :method => :get }, :requirements => { :type => /[0-9]+/ }
   map.connect 'posts/new/:type', :controller => 'posts', :action => 'new', :conditions => { :method => :get }
 
   map.resources :blogs, :requirements => { :id => /[a-zA-Z]+[0-9a-zA-Z]{4,}(-[0-9a-zA-Z]+)*/ }
