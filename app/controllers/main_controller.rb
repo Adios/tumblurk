@@ -53,7 +53,7 @@ class MainController < ApplicationController
   end
   
   def dashboard
-    @posts = Post.all :order => 'created_at DESC'
+    @posts = @current_user.granted_posts
     @blogs = @current_user.blogs
     session[:current_blog] = nil
     render 'main', :layout => 'dashboard'

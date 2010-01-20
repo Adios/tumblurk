@@ -1,14 +1,14 @@
 <fieldset>
-<p>type: <%= post_type @post.post_type %></p>
+<p>type: <%= @post.kind %></p>
 <p>title: <%= @post.head %></p>
 <p>content: <%= @post.body %></p>
 <p>created_at: <%= @post.created_at %></p>
 <p>publish_at: <%= @post.publish_at? ? @post.publish_at : nil %></p>
 <p>by: <%= @post.user_id? ? @post.user.login : 'someone' %></p>
 <p>	
-	<% if post.origin %>
+	<% if @post.origin %>
 	reblogged from
-	<%= link_to_if post.origin.destroyed?, ' #' + @post.origin.id.to_s, post_path(@post.origin) %>
+	<%= link_to_if @post.origin.destroyed?, ' #' + @post.origin.id.to_s, post_path(@post.origin) %>
 	<% end %>
 </p>
 <p>

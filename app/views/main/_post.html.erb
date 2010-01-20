@@ -1,5 +1,5 @@
 <fieldset class="post">
-	<legend title="<%= post.updated_at.strftime('%H:%M, %Y/%m/%d') %>"><%= time_ago_in_words(post.updated_at, true) + ' ago' %></legend>
+	<legend title="<%= post.updated_at.strftime('%H:%M, %Y/%m/%d') %>"><%= link_to time_ago_in_words(post.updated_at, true) + ' ago in ' + post.blog.name , post_path(post) %></legend>
 
 	<div class="operation right">
 		<% if post.user_id == session[:user_id] %>

@@ -21,6 +21,12 @@ class User < ActiveRecord::Base
   after_create :create_default_blog
   before_destroy :destroy_all_blogs
 
+  # user.posts + user.followings.posts + user.blogs.posts
+  def granted_posts 
+    (((ps ||= []) << posts) << followings.collect {|blog| blog.posts }) << blogs.collect {|blog| blog.posts }
+    ps.flatten.uniq.sort_by {|post| post.created_at }.reverse!
+  end
+
   def password=(pass)
     @password = pass
     self.salt = User.random_string(10) unless self.salt?
