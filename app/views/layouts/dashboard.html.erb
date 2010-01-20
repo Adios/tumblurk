@@ -14,9 +14,9 @@
 			</div>
 			
 			<div id="menubar" class="right">
-				<% if logged_in? %>
+				<% if u = logged_in %>
 				<%= link_to 'Logout', session_path, :method => :delete %>
-				<%= link_to session[:user_login], edit_user_path(session[:user_id]) %>
+				<%= link_to u.login, edit_user_path(u) %>
 				<% else %>
 				<%= link_to 'Login', root_url %>
 				<%= link_to 'Signup', new_user_path %>

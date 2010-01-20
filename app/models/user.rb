@@ -2,6 +2,10 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :tags, :through => :posts
   has_and_belongs_to_many :blogs
+  has_and_belongs_to_many :followings, :class_name => 'Blog', :join_table => 'following_relations',
+                          :association_foreign_key => 'blog_id',
+                          :foreign_key => 'user_id',
+                          :before_add => [ :cannot_follow_myself, :cannot_follow_existed ]
   
   validates_presence_of :login, :email, :password, :password_confirmation
   validates_confirmation_of :password
@@ -56,6 +60,14 @@ class User < ActiveRecord::Base
     blog.default_blog = true
     blog.users << self
     blog.save
+  end
+  
+  def cannot_follow_existed(blog)
+    raise if followings.exists? blog
+  end
+  
+  def cannot_follow_myself(blog)
+    raise if blog == self.blogs.find_by_default_blog(true)
   end
   
   def self.encrypt(pass, salt)

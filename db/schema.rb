@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 6) do
+ActiveRecord::Schema.define(:version => 7) do
 
   create_table "blogs", :force => true do |t|
     t.string   "name"
@@ -22,6 +22,11 @@ ActiveRecord::Schema.define(:version => 6) do
   end
 
   create_table "blogs_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "blog_id"
+  end
+
+  create_table "following_relations", :id => false, :force => true do |t|
     t.integer "user_id"
     t.integer "blog_id"
   end

@@ -7,6 +7,35 @@ class UserTest < ActiveSupport::TestCase
     @cindera = users(:cindera)
   end
   
+  test 'following blogs' do
+    # follow a blog
+    assert_difference '@adios.followings.count' do
+      assert_difference 'blogs(:flachesis).followers.count' do
+        assert @adios.followings << blogs(:flachesis)
+      end
+    end
+    # follow a followed blog
+    assert_no_difference '@adios.followings.count' do
+      assert_no_difference 'blogs(:flachesis).followers.count' do
+        begin
+          @adios.followings << blogs(:cindera)
+        rescue
+          assert true
+        end
+      end
+    end
+    # follow a my own blog
+    assert_no_difference '@adios.followings.count' do
+      assert_no_difference 'blogs(:flachesis).followers.count' do
+        begin
+          @adios.followings << blogs(:adios)
+        rescue
+          assert true
+        end
+      end
+    end
+  end
+  
   test 'encrypt() & hashed generation' do
     u = User.new :login => 'soida', :email => 'adios@adios.com'
     u.salt = '1000'

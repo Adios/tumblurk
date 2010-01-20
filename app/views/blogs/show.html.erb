@@ -3,6 +3,13 @@
 <% end %>
 
 <div id="menubar">
+	<% unless (u = logged_in and u.blogs.find_by_default_blog(true) == @blog) %>
+	<%= 
+		link_to_if (@blog.followers.exists? u), 'unfollow', blog_following_path(@blog.name), :method => :delete do 
+			link_to 'follow', blog_following_path(@blog.name), :method => :post
+		end
+	%>
+	<% end %>
 	<%= link_to 'tumblurk', root_url %>
 </div>
 

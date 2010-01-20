@@ -3,21 +3,18 @@
 <% end %>
 
 <div id="sidebar" class="left">
+	<h2>followings</h2>
+	<ul>
+		<%= render :partial => 'following', :collection => @current_user.followings %>
+	</ul>
+	
 	<h2>blogs</h2>
 	<ul>
-	<% @blogs.each do |blog| %>
-		<li>
-		<% if @blog and @blog.name == blog.name %>
-			<%= render :partial => 'blog', :object => @blog %>
-		<% else %>
-			<%= link_to blog.name, dashboard_blog_path(blog.name) %>
-		<% end %>
-		<%= link_to '→', blog_path(blog.name), :target => '_blank' %>
-		</li>
-	<% end %>
+		<%= render :partial => 'blog', :collection => @blogs %>
 	</ul>
-	<h2><%= link_to 'create another one', new_blog_path %></h2>
-	
+
+	<h2><%= link_to 'create another blog', new_blog_path %></h2>
+
 	<% if flash[:message] or flash[:notice] or flash[:error] %>
 	<h2>status</h2>
 	<div id="errorExplanation" style="font-size: 80%; margin: 0 0.5em; width: 95%;">
@@ -26,6 +23,10 @@
 		<%= flash[:notice] %>
 	</div>
 	<% end %>
+	
+
+
+
 </div>
 
 <div id="content" class="right">

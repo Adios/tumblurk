@@ -1,6 +1,10 @@
 class Blog < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_many :posts, :dependent => :destroy
+  has_and_belongs_to_many :followers, :class_name => 'User', :join_table => 'following_relations',
+                          :association_foreign_key => 'user_id',
+                          :foreign_key => 'blog_id',
+                          :readonly => true
   
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false

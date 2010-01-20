@@ -11,8 +11,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :posts, :except => %w(index)
   map.connect 'posts/new/:id', :controller => 'posts', :action => 'repost', :conditions => { :method => :get }, :requirements => { :id => /[0-9]+/ }
   map.compose 'posts/new/:type', :controller => 'posts', :action => 'new', :conditions => { :method => :get }
-
-  map.resources :blogs, :requirements => { :id => /[a-zA-Z]+[0-9a-zA-Z]{4,}(-[0-9a-zA-Z]+)*/ }
+ 
+  map.resources :blogs, :requirements => { :id => /[a-zA-Z]+[0-9a-zA-Z]{4,}(-[0-9a-zA-Z]+)*/ } do |blog|
+    blog.resource :following, :controller => :following, :only => %w(create destroy)
+  end
   map.invite 'blogs/:id/invite', :controller => 'blogs', :action => 'invite', :conditions => { :method => :post }, :requirements => { :id => /[a-zA-Z]+[0-9a-zA-Z]{4,}(-[0-9a-zA-Z]+)*/ }
 
   

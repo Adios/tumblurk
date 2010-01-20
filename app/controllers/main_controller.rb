@@ -61,11 +61,10 @@ class MainController < ApplicationController
   
   def dashboard_for_blog
     @blogs = @current_user.blogs
-    @blog = Blog.find_by_name params[:name]
     
-    if @blog and @blog.users.exists?(@current_user)
-      @posts = @blog.posts
-      session[:current_blog] = @blog.id
+    if (blog = Blog.find_by_name(params[:name])) and blog.users.exists?(@current_user)
+      @posts = blog.posts
+      session[:current_blog] = blog.id
       render 'main', :layout => 'dashboard'
     else
       flash[:error] = "Blog doesn't exist or you didn't participate in."
