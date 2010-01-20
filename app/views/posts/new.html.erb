@@ -16,7 +16,7 @@
 			making a new <%= @post.kind %>
 			<% if @post.origin %>
 			from
-			<%= link_to_if post.origin.destroyed?, ' #' + @post.origin.id.to_s, post_path(@post.origin) %>
+			<%= link_to_if @post.origin.destroyed?, ' #' + @post.origin.id.to_s, post_path(@post.origin) %>
 			<%= f.hidden_field :origin_id %>
 			<% else %>
 			...

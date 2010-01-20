@@ -19,5 +19,6 @@
 <% end %>
 
 <div id="posts">
-	<%= render :partial => 'main/post', :collection => @blog.posts, :spacer => 'main/spacer' %>
+	<%= render :partial => 'main/post', 
+		:collection => (controller.controller_name == 'posts') ? [@post] : @blog.posts, :spacer => 'main/spacer' %>
 </div>

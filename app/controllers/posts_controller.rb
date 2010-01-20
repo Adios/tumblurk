@@ -30,6 +30,8 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
+    @blog = @post.blog
+    render 'blogs/show'
   end
   
   def edit
