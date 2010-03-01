@@ -1,0 +1,106 @@
+graph G {
+	label="Architecture of Tumblurk";
+	rankdir="LR";
+	subgraph cluster1 { 
+		bgcolor = "#f7f7ff";
+		label = "flat model";
+		node [shape="circle"];
+		na [label="winni"];
+		nb [label="sunwu"];
+		nc [label="rhhwang"];
+		nd [label="adios"];
+		
+		node [shape="rectangle", height=".1"];
+		n1 [label="/blogs/data-structure", style="bold"];
+		n2 [label="/blogs/gais-research", style="bold"];
+		n3 [label="/blogs/hsng-research"];
+		n4 [label="/blogs/sunwu"];
+		n5 [label="/blogs/rhhwang"];
+		n6 [label="/blogs/winni"];
+		n7 [label="/blogs/adios"];
+		n8 [label="/blogs/cs-epapers", style="bold"];
+		n9 [label="/blogs/cs-office"];
+
+		na -- n6;
+		na -- n8[style="bold"];
+		na -- n9;
+		nb -- n1[style="bold"];
+		nb -- n2[style="bold"];
+		nb -- n4;
+		nc -- n3;
+		nc -- n5;
+		nc -- n8[style="bold"];
+		nd -- n7;
+		nd -- n1[style="bold"];
+		nd -- n2[style="bold"];
+		nd -- n8[style="bold"];
+	};
+
+	
+	subgraph cluster0 {
+		label = "note"
+		bgcolor = "#fff7f7";
+		a[shape="circle", label="an user"];
+		b[shape="rectangle", label="a blog"];
+		c[shape="ellipse", label="a node"];
+		d[shape="component", label="one part"];
+	}
+
+	subgraph cluster2 {
+		bgcolor = "#f7f7ff";
+		label = "hierarchical architecture";
+		o01 [label = "/"];
+		o02 [label = "announce"];
+		o03 [label = "courses"];
+		o04 [label = "rules"];
+		o05 [label = "epapers"];
+		o06 [label = "research"];
+		o07 [label = "recruit"];
+		
+		o01 -- o02; o01 -- o03; o01 -- o04; o01 -- o05;
+		o01 -- o06; o01 -- o07;
+		
+		o003 [label="undergraduate"]
+		o004 [label="master"];
+		o005 [label="PhD"];
+		o006 [label="DS"];
+		o007 [label="GAIS"];
+		o008 [label="HSNG"];
+	
+		o03 -- o006; o06 -- o007; o06 -- o008;
+		o07 -- o003; o07 -- o004; o07 -- o005;
+		
+		node [shape="component", style="bold", color="blue"];
+		edge [color="blue", style="bold"];
+		
+		b1 [label="cs-epapers"];
+		b2 [label="data-structure"];
+		b3 [label="gais-research"];
+		b4 [label="hsng-research"];
+		b5 [label="extract", color="red"];
+		b6 [label="extract", color="red"];
+		
+		o05 -- b1; o006 -- b2; o007 -- b3; o008 -- b4; o02 -- b5 [color="red"];
+		o04 -- b6 [color="red"];
+	}
+
+	edge [color="blue", style="dashed", dir="forward", label="mapping", fontcolor="blue"]
+	
+	n8 -- b1;
+	n1 -- b2;
+	n2 -- b3;
+	n3 -- b4;
+	
+	edge [color="green", style="dashed", dir="forward", label="manage", fontcolor="green"]
+	
+	na -- o01;
+	nd -- o05;
+
+	edge [color="red", style="dashed", dir="forward", label="tag", fontcolor="red"]
+	
+	n4 -- b5;
+	n5 -- b5;
+	n9 -- b5;
+	n1 -- b5;
+	n9 -- b6;
+}
