@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 7) do
+ActiveRecord::Schema.define(:version => 10) do
 
   create_table "blogs", :force => true do |t|
     t.string   "name"
@@ -29,6 +29,26 @@ ActiveRecord::Schema.define(:version => 7) do
   create_table "following_relations", :id => false, :force => true do |t|
     t.integer "user_id"
     t.integer "blog_id"
+  end
+
+  create_table "node_mappings", :force => true do |t|
+    t.integer "tag_id"
+    t.integer "node_id"
+    t.integer "blog_id"
+  end
+
+  create_table "node_permissions", :force => true do |t|
+    t.integer "user_id"
+    t.integer "node_id"
+  end
+
+  create_table "nodes", :force => true do |t|
+    t.string   "name"
+    t.text     "layout"
+    t.text     "content"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "posts", :force => true do |t|

@@ -1,5 +1,7 @@
 class Blog < ActiveRecord::Base
   has_and_belongs_to_many :users
+  has_many :mappings, :class_name => 'NodeMapping'
+  has_many :nodes, :through => :mappings
   has_many :posts, :dependent => :destroy
   has_and_belongs_to_many :followers, :class_name => 'User', :join_table => 'following_relations',
                           :association_foreign_key => 'user_id',

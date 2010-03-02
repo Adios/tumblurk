@@ -25,3 +25,38 @@ flachesis:
     id: 5
     name: flachesis
     default_blog: t
+sunwu:
+    id: 6
+    name: sunwu
+    title: This is SunWu's Home
+    default_blog: t
+rhhwang:
+    id: 7
+    name: rhhwang
+    title: This is rhhwang's Home
+    default_blog: t
+winni:
+    id: 8
+    name: winni
+    title: This is winni's House
+    default_blog: t
+data_structure:
+    id: 9
+    name: data-structure
+    title: DS
+hsng_research:
+    id: 10
+    name: hsng-research
+    title: HSNG
+gais_research:
+    id: 11
+    name: gais-research
+    title: GAIS
+cs_epapers:
+    id: 12
+    name: cs-epapers
+    title: CS E-Papers!
+cs_office:
+    id: 13
+    name: cs-office
+    title: CCU CS Official Blog

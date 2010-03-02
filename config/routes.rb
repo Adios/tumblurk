@@ -17,6 +17,11 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.invite 'blogs/:id/invite', :controller => 'blogs', :action => 'invite', :conditions => { :method => :post }, :requirements => { :id => /[a-zA-Z]+[0-9a-zA-Z]{4,}(-[0-9a-zA-Z]+)*/ }
 
+  map.resources :nodes, :only => %w(create update destroy) do |node|
+    node.resources :mappings, :controller => 'node_mappings', :only => %w(create destroy update)
+    node.resources :permissions, :controller => 'node_permissions', :only => %w(create destroy update)
+  end
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -50,6 +55,7 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
+  map.wildcard "*path", :controller => "main", :action => "index"
   map.root :controller => "main"
 
   # See how all your routes lay out with "rake routes"

@@ -4,3 +4,9 @@ official:
 beauty:
     name: beauty
     id: 2
+announce:
+    name: announce
+    id: 3
+rule:
+    name: rule
+    id: 4

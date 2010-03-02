@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many :posts
   has_many :tags, :through => :posts
+  has_many :permissions, :class_name => 'NodePermission'
+  has_many :nodes, :through => :permissions
   has_and_belongs_to_many :blogs
   has_and_belongs_to_many :followings, :class_name => 'Blog', :join_table => 'following_relations',
                           :association_foreign_key => 'blog_id',

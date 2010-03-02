@@ -1,0 +1,50 @@
+root:
+    id: 1
+announce:
+    id: 2
+    parent_id: 1
+    name: announce
+epapers:
+    id: 3
+    parent_id: 1
+    name: epapers
+rules:
+    id: 4
+    parent_id: 1
+    name: rules
+recruit:
+    id: 5
+    parent_id: 1
+    name: recruit
+courses:
+    id: 6
+    parent_id: 1
+    name: courses
+research:
+    id: 7
+    parent_id: 1
+    name: research
+phd:
+    id: 8
+    parent_id: 5
+    name: phd
+master:
+    id: 9
+    parent_id: 5
+    name: master
+undergraduate:
+    id: 10
+    parent_id: 5
+    name: undergraduate
+ds:
+    id: 11
+    parent_id: 6
+    name: ds
+hsng:
+    id: 12
+    parent_id: 7
+    name: hsng
+gais:
+    id: 13
+    parent_id: 7
+    name: gais

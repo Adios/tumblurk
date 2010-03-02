@@ -18,3 +18,24 @@ flachesis:
     salt: 1000
     email: xxxx@gmail.com
     hashed_password: <%= Digest::SHA1.hexdigest('testtesttesttest' + '1000') %>
+
+winni:
+    id: 4
+    login: winni
+    salt: 1000
+    email: winni0829@hotmail.com
+    hashed_password: <%= Digest::SHA1.hexdigest('abc123' + '1000') %>
+    
+sunwu:
+    id: 5
+    login: sunwu
+    salt: 1000
+    email: sw2004@gmail.com
+    hashed_password: <%= Digest::SHA1.hexdigest('abc123' + '1000') %>
+        
+rhhwang:
+    id: 6
+    login: rhhwang
+    salt: 1000
+    email: rhhwang@cs.ccu.edu.tw
+    hashed_password: <%= Digest::SHA1.hexdigest('abc123' + '1000') %>
