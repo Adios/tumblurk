@@ -1,0 +1,63 @@
+<% content_for :title do %>
+<title>CS Tumblurk</title>
+<% end %>
+<% content_for :head do %>
+<%= stylesheet_link_tag 'site/layout' %>
+<% end %>
+
+<div id="header">
+	<div class="loginbar">
+		<% if logged_in %>
+			<%= link_to session[:user_login], dashboard_path %>
+		<% else %>
+			<%= link_to 'login', '/login' %>
+		<% end %>
+	</div>
+	This is site of CCU CS.
+</div>
+
+<div id="tier">
+	<%= tiering @path, '→→' %>
+</div>
+
+
+<div id="menu">
+	<ul>
+		<% if @node.parent %>
+		<li><%= link_to '..up', '/' + @parent_path %></li>
+		<% end %>
+		<% @node.children.each do |node| %>
+		<li><%= link_to node.name, @children_path.call(node.name) %></li>
+		<% end %>
+	</ul>
+</div>
+
+<div id="wrapper">
+	<div id="content">
+		<p>
+			<br />
+			allaaaa!
+			<%= @content %>
+		</p>
+		<br />
+		<div id="embedded">
+			<% @data.each do |post| %>
+			<p>
+				@<%= post.updated_at%>
+			</p>
+			<p>
+				<%= link_to post.head, post_path(post) %>
+				
+				<br />
+				<%= post.body %>
+			</p>
+			<p class="right">
+				<%= link_to 'from ' + post.user.login, post_path(post) %>
+			</p>
+			<div class="clear"></div>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+<div class="clear"></div>

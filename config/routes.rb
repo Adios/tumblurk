@@ -12,10 +12,12 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'posts/new/:id', :controller => 'posts', :action => 'repost', :conditions => { :method => :get }, :requirements => { :id => /[0-9]+/ }
   map.compose 'posts/new/:type', :controller => 'posts', :action => 'new', :conditions => { :method => :get }
  
-  map.resources :blogs, :requirements => { :id => /[a-zA-Z]+[0-9a-zA-Z]{4,}(-[0-9a-zA-Z]+)*/ } do |blog|
+  #map.resources :blogs, :requirements => { :id => /[a-zA-Z]+[0-9a-zA-Z]{4,}(-[0-9a-zA-Z]+)*/ } do |blog|
+  map.resources :blogs, :requirements => { :id => /[-\w]+/ } do |blog|
     blog.resource :following, :controller => :following, :only => %w(create destroy)
   end
-  map.invite 'blogs/:id/invite', :controller => 'blogs', :action => 'invite', :conditions => { :method => :post }, :requirements => { :id => /[a-zA-Z]+[0-9a-zA-Z]{4,}(-[0-9a-zA-Z]+)*/ }
+  #map.invite 'blogs/:id/invite', :controller => 'blogs', :action => 'invite', :conditions => { :method => :post }, :requirements => { :id => /[a-zA-Z]+[0-9a-zA-Z]{4,}(-[0-9a-zA-Z]+)*/ }
+  map.invite 'blogs/:id/invite', :controller => 'blogs', :action => 'invite', :conditions => { :method => :post }, :requirements => { :id => /[-\w]+/ }
 
   map.resources :nodes, :only => %w(create update destroy) do |node|
     node.resources :mappings, :controller => 'node_mappings', :only => %w(create destroy update)
@@ -55,8 +57,10 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.wildcard "*path", :controller => "main", :action => "index"
+  map.connect "/login", :controller => "main", :action => "index"
+  map.wildcard "*path", :controller => "site", :action => "show", :conditions => { :method => :get }
   map.root :controller => "main"
+
 
   # See how all your routes lay out with "rake routes"
 

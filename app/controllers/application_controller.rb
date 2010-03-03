@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   helper :all
   protect_from_forgery
   
+  include Exceptions
+  
   protected
   
   # * work as a filter for any other method that needs to be authencated.
@@ -20,5 +22,17 @@ class ApplicationController < ActionController::Base
   # redirect to user page if the session has been set.
   def redirect_logged
     redirect_to dashboard_url if session[:user_id]
+  end
+  
+  def local_request?
+    true
+  end
+  
+  def rescue_action_in_public(exception)
+    message = exception.backtrace.join("\n") unless exception
+    case exception
+      when Exceptions::PageNotFound
+           render :file => "#{RAILS_ROOT}/public/404.html", :layout => false, :status => 404
+    end
   end
 end

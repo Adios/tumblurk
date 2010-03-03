@@ -3,6 +3,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<%= stylesheet_link_tag 'reset', 'styles' %>
+	<%= yield :title -%>
 	<title>Tumblurk: <%= controller.action_name %></title>
 	<%= yield :head -%>
 </head>

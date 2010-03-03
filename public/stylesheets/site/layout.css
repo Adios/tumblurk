@@ -1,0 +1,57 @@
+body {
+	margin: 0 3%;
+}
+#header {
+	font-size: 400%;
+	background-color: lightyellow;
+	padding: 20px;
+	position: relative;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+}
+
+#wrapper {
+	background-color: lightgreen;
+	width: 77%;
+	margin-left: 23%;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+}
+
+#tier {
+	padding: 20px;
+	margin-top: 3%;
+	margin-bottom: 3%;
+	background-color: lightyellow;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;}
+
+#menu {
+	width: 20%;
+	float: left;
+	background-color: lightblue;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+}
+
+#content {
+	margin: 20px;
+}
+
+li {
+	list-style: disc;
+}
+ul {
+	margin: 20px;
+}
+
+div.loginbar {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	font-size: 40%;
+}
