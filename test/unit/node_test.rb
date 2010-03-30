@@ -11,7 +11,7 @@ class NodeTest < ActiveSupport::TestCase
     n.name = '[]'
     assert !n.save
   end
-  
+
   test "access rights" do
     assert nodes(:root).granted? users(:winni)
     assert nodes(:epapers).granted? users(:adios)
@@ -19,12 +19,12 @@ class NodeTest < ActiveSupport::TestCase
     assert_nil nodes(:gais).granted? users(:adios)
     assert nodes(:gais).granted? users(:winni)
   end
-  
+
   test "path including" do
-    assert_equal Node.find_by_name(nil), Node.include?([])
-    assert_equal Node.find_by_name('gais'), Node.include?(['research', 'gais'])
-    assert !Node.include?(['gais'])
-    assert_equal Node.find_by_name('master'), Node.include?(['recruit', 'master'])
-    assert !Node.include?(['recruit', 'master', '1'])
+    assert_equal Node.find_by_name(nil), Node.routable?([])
+    assert_equal Node.find_by_name('gais'), Node.routable?(['research', 'gais'])
+    assert !Node.routable?(['gais'])
+    assert_equal Node.find_by_name('master'), Node.routable?(['recruit', 'master'])
+    assert !Node.routable?(['recruit', 'master', '1'])
   end
 end

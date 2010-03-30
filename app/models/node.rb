@@ -5,12 +5,12 @@ class Node < ActiveRecord::Base
   has_many :mappings, :class_name => 'NodeMapping', :dependent => :destroy
   has_many :users, :through => :permissions
   has_many :blogs, :through => :mappings
-  
+
   validates_presence_of :name
   validates_format_of :name, :with => /^[-$.+!*'(),\w]+$/, :message => "Invalid format."
-  
+
   attr_protected :id, :parent_id
-  
+
   # test a user if one has the ability to admin the current node
   def granted? user
     current = self
@@ -20,9 +20,9 @@ class Node < ActiveRecord::Base
     end
     nil
   end
-  
+
   # test a path if it is in the tree.
-   def self.include? ns
+   def self.routable? ns
      # move to root
      pos = Node.find_by_name(nil)
      # scan

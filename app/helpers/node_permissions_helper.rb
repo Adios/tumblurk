@@ -1,0 +1,2 @@
+module NodePermissionsHelper
+end
