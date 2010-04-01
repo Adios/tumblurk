@@ -1,5 +1,6 @@
 root:
     id: 1
+    name: root
 announce:
     id: 2
     parent_id: 1

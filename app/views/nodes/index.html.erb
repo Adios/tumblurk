@@ -1,0 +1,162 @@
+<div id="header">
+	header
+</div>
+
+<div id="options">
+	options
+</div>
+
+<div id="panel">
+	<div id="splash">
+		<div>
+			<%= image_tag 'loading_bar.gif' %>
+		</div>
+	</div>
+	<div id="control">
+		<div id="node-tree"></div>
+	</div>
+	<div id="display">
+		display
+	</div>
+	<div class="clear"></div>
+</div>
+
+<% content_for :head do %>
+	<%= stylesheet_link_tag 'nodes/styles' %>
+<% end %>
+<% content_for :title do %>
+	<title>Tumblurk: Manage Nodes</title>
+<% end %>
+<% content_for :js_lib do %>
+	<%= javascript_include_tag 'tree/jquery.tree.js' %>
+	<%= javascript_include_tag 'tree/plugins/jquery.tree.contextmenu.js' %>
+<% end %>
+<% content_for :js_ready do %>
+var stat = <%= @tree.to_json %>,
+	auth_token = "<%= form_authenticity_token %>";
+
+stat.state = 'open';
+
+function on_create(n, rn, y, t, rb) {
+	pid = (y == 'inside')
+		? $(rn).find('a:first').attr('href').split('/')[2]
+		: $(rn).parent().parent().find('a:first').attr('href').split('/')[2]
+
+	$.ajax({
+		type: 'POST',
+		url: '<%= nodes_path %>',
+		data: $.param({
+			authenticity_token: auth_token,
+			parent_id: pid,
+			'node[name]': 'newnode'
+		}),
+		success: function(data) {
+			if (data.status == 200)
+				$(n).find('a:first').attr('href', data.data);
+			else
+				$.tree.rollback(rb);
+		},
+		dataType: 'json'
+	});
+};
+
+function on_delete(n, t, rb) {
+	$.ajax({
+		type: 'POST',
+		url: $(n).find('a:first').attr('href'),
+		data: $.param({
+			_method: 'DELETE',
+			authenticity_token: auth_token
+		}),
+		success: function(data) {
+			if (data.status != 200)
+				$.tree.rollback(rb);
+		},
+		dataType: 'json'
+	});
+};
+
+function on_rename(n, t, rb) {
+	var a = $(n).find('a:first');
+
+	$.ajax({
+		type: 'POST',
+		url: a.attr('href'),
+		data: $.param({
+			_method: 'PUT',
+			authenticity_token: auth_token,
+			parent_id: $(n).parent().parent().find('a:first').attr('href').split('/')[2],
+			'node[name]': $.trim(a.text()),
+		}),
+		success: function(data) {
+			if (data.status == 200) {
+			} else {
+				$.tree.rollback(rb);
+			}
+		},
+		dataType: 'json'
+	});
+};
+
+function on_move(n, rn, y, t, rb) {
+	$.ajax({
+		type: 'POST',
+		url: $(n).find('a:first').attr('href'),
+		data: $.param({
+			_method: 'PUT',
+			authenticity_token: auth_token,
+			parent_id: $(n).parent().parent().find('a:first').attr('href').split('/')[2]
+		}),
+		success: function(data) {
+			if (data.status == 200) {
+			} else {
+				$.tree.rollback(rb);
+			}
+		},
+		dataType: 'json'
+	});
+};
+
+function on_select(n, t) {
+};
+
+$('#node-tree').tree({
+	data: {
+		type: 'json',
+		async: true,
+		opts: {
+			async: true,
+			method: 'GET',
+		}
+	},
+	plugins: {
+		contextmenu: {}
+	},
+	lang: { new_node: 'new node' },
+	ui: {
+		theme_path: '<%= stylesheet_path "tree/default/style" %>',
+		theme_name: 'default',
+		animation: 50
+	},
+	types: { "default": { icon: { image: "<%= image_path('tree_node_page.png') %>" } } },
+	callback: {
+		onload: function(t) {
+			t.settings.data.opts.static = false;
+		},
+		beforedata: function(n, t) {
+			if(n == false) t.settings.data.opts.static = stat;
+		},
+		oncreate: on_create,
+		ondelete: on_delete,
+		onrename: on_rename,
+		onmove: on_move,
+		onselect: on_select
+	}
+});
+$('#splash').ajaxStart(function() {
+	$(this).show('fast');
+}).ajaxComplete(function() {
+	$(this).hide('slow');
+}).hide('slow');
+
+<% end %>

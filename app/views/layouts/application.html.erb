@@ -11,3 +11,11 @@
 	<%= yield %>
 </body>
 </html>
+
+<%= javascript_include_tag("http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js") %>
+<%= yield :js_lib %>
+<% javascript_tag do %>
+$(function() {
+  <%= yield :js_ready %>
+});
+<% end %>

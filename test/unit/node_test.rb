@@ -12,6 +12,19 @@ class NodeTest < ActiveSupport::TestCase
     assert !n.save
   end
 
+  test "uniquess in the same level" do
+    n1 = Node.new :name => 'newnode'
+    n1.parent = Node.first
+    assert n1.save
+    n2 = Node.new :name => 'newnode'
+    n2.parent = Node.first
+    assert !n2.save
+    assert n2.errors.invalid?('name')
+    n3 = Node.new :name => 'newnode'
+    n3.parent = n1
+    assert n3.save
+  end
+
   test "access rights" do
     assert nodes(:root).granted? users(:winni)
     assert nodes(:epapers).granted? users(:adios)
@@ -21,7 +34,7 @@ class NodeTest < ActiveSupport::TestCase
   end
 
   test "path including" do
-    assert_equal Node.find_by_name(nil), Node.routable?([])
+    assert_equal Node.first, Node.routable?([])
     assert_equal Node.find_by_name('gais'), Node.routable?(['research', 'gais'])
     assert !Node.routable?(['gais'])
     assert_equal Node.find_by_name('master'), Node.routable?(['recruit', 'master'])

@@ -9,7 +9,7 @@ class NodePermissionsController < ApplicationController
     end
   end
 
-  def show
+  def edit
     @permission = NodePermission.find(params[:id])
 
     respond_to do |format|

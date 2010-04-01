@@ -9,7 +9,7 @@ class NodeMappingsController < ApplicationController
     end
   end
 
-  def show
+  def edit
     @mapping = NodeMapping.find(params[:id])
 
     respond_to do |format|

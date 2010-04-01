@@ -1,0 +1,62 @@
+html { background-color: #ececec; }
+body {
+	padding-top: 20px;
+	width: 85%;
+	min-width: 976px;
+	background-color: transparent;
+	margin: 0 auto;
+	font-family: 'Lucida Grande', 'Lucida Sans Unicode', Arial, Verdana, sans-serif;
+}
+#header {
+	height: 40px;
+	background: -webkit-gradient(linear,
+		left top, left bottom, from(#ccc), to(#777),
+		color-stop(0.2, #bbb),
+		color-stop(0.4, #aaa),
+		color-stop(0.5, #9f9f9f),
+		color-stop(0.7, #888));
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+}
+#options {
+	padding-top: 20px;
+}
+#panel {
+	background-color: white;
+	border: 1px solid #e0e0e0;
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	position: relative;
+}
+#splash {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0.8;
+	background-color: white;
+	min-height: 520px;
+	width: 100%;
+	line-height: 520px;
+	height: 100%;
+	text-align: center;
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+}
+#control {
+	float: left;
+	overflow: auto;
+	min-height: 520px;
+	width: 38%;
+}
+#display {
+	width: 61%;
+	border-left: 1px solid #e0e0e0;
+	float: left;
+	min-height: 520px;
+}
+#node-tree {
+	margin: 10px 0;
+}
