@@ -19,9 +19,9 @@ ActionController::Routing::Routes.draw do |map|
   #map.invite 'blogs/:id/invite', :controller => 'blogs', :action => 'invite', :conditions => { :method => :post }, :requirements => { :id => /[a-zA-Z]+[0-9a-zA-Z]{4,}(-[0-9a-zA-Z]+)*/ }
   map.invite 'blogs/:id/invite', :controller => 'blogs', :action => 'invite', :conditions => { :method => :post }, :requirements => { :id => /[-\w]+/ }
 
-  map.resources :nodes, :except => %w(new show) do |node|
-    node.resources :mappings, :controller => 'node_mappings', :except => %w(new show)
-    node.resources :permissions, :controller => 'node_permissions', :except => %w(new show)
+  map.resources :nodes, :except => %w(new edit) do |node|
+    node.resources :mappings, :controller => 'node_mappings', :except => %w(new edit)
+    node.resources :permissions, :controller => 'node_permissions', :except => %w(new edit)
   end
 
 

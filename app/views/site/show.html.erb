@@ -24,7 +24,7 @@
 <div id="menu">
 	<ul>
 		<% if @node.parent %>
-		<li><%= link_to '..up', '/' + @parent_path %></li>
+		<li><%= link_to '..up', @parent_path %></li>
 		<% end %>
 		<% @node.children.each do |node| %>
 		<li><%= link_to node.name, @children_path.call(node.name) %></li>
@@ -47,7 +47,7 @@
 			</p>
 			<p>
 				<%= link_to post.head, post_path(post) %>
-				
+
 				<br />
 				<%= post.body %>
 			</p>

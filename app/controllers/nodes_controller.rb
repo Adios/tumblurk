@@ -7,7 +7,7 @@ class NodesController < ApplicationController
     @tree = treeify
   end
 
-  def edit
+  def show
     @node = Node.find(params[:id])
     render :layout => false
   end

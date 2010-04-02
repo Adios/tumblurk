@@ -47,6 +47,7 @@ class Node < ActiveRecord::Base
   def name_must_be_unique_in_the_current_level
     if self.parent
       self.parent.children.each do |node|
+        next if node == self
         if name == node.name
           errors.add(:name, "must be unique in the current level.")
           return

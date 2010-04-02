@@ -48,7 +48,7 @@ function on_create(n, rn, y, t, rb) {
 		data: $.param({
 			authenticity_token: auth_token,
 			parent_id: pid,
-			'node[name]': 'newnode'
+			'node[name]': 'foo'
 		}),
 		success: function(data) {
 			if (data.status == 200)
@@ -132,7 +132,7 @@ $('#node-tree').tree({
 	plugins: {
 		contextmenu: {}
 	},
-	lang: { new_node: 'new node' },
+	lang: { new_node: 'foo' },
 	ui: {
 		theme_path: '<%= stylesheet_path "tree/default/style" %>',
 		theme_name: 'default',

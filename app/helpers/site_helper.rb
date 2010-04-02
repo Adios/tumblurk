@@ -5,6 +5,6 @@ module SiteHelper
       tier << [path[i], path[0,i + 1].join('/')]
     end
     tier.unshift ['root', '']
-    p tier.map {|t| link_to t[0], '/' + t[1] }.join(sep)
+    tier.map {|t| link_to t[0], '/' + t[1] }.join(sep)
   end
 end
