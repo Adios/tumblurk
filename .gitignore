@@ -5,3 +5,4 @@ doc/app
 doc/guides
 db/*.sqlite3
 .todo
+*.swp

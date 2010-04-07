@@ -15,9 +15,13 @@ body {
 		color-stop(0.4, #aaa),
 		color-stop(0.5, #9f9f9f),
 		color-stop(0.7, #888));
+	border: 1px solid #cecece;
 	border-radius: 7px;
 	-webkit-border-radius: 7px;
 	-moz-border-radius: 7px;
+	box-shadow: 0px 5px 5px #aaa;
+	-webkit-box-shadow: 0px 5px 5px #aaa;
+	-moz-box-shadow: 0px 5px 5px #aaa;
 }
 #options {
 	padding-top: 20px;
@@ -28,6 +32,9 @@ body {
 	border-radius: 7px;
 	-webkit-border-radius: 7px;
 	-moz-border-radius: 7px;
+	box-shadow: 0px 5px 5px #aaa;
+	-webkit-box-shadow: 0px 5px 5px #aaa;
+	-moz-box-shadow: 0px 5px 5px #aaa;
 	position: relative;
 }
 #splash {
